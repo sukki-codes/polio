@@ -4,7 +4,6 @@
     "source.fixAll.stylelint": "explicit"
   },
   "eslint.validate": [
-    "react",
     "javascript",
     "typescript",
     "typescriptreact",
