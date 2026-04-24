@@ -1,0 +1,31 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit"
+  },
+  "eslint.validate": [
+    "react",
+    "javascript",
+    "typescript",
+    "typescriptreact",
+    "html"
+  ],
+  "stylelint.enable": true,
+  "stylelint.configFile": ".stylelintrc.json",
+  "stylelint.validate": ["css", "typescript", "typescriptreact"],
+  "js/ts.format.enable": false,
+  "css.lint.unknownAtRules": "ignore",
+  "editor.formatOnSave": true,
+  "cSpell.words": [
+    "cx-suite",
+    "renderable"
+  ],
+  "i18n-ally.localesPaths": [
+    "src/locales",
+    "src/locales/langs"
+  ],
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "stylelint.packageManager": "npm",
+  "eslint.useFlatConfig": true,
+  "eslint.format.enable": true,
+}
