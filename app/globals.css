@@ -16,6 +16,7 @@
 /* 1rem === 10px 설정 */
 :root {
   font-size: 62.5%;
+  -webkit-text-size-adjust: none;
   text-size-adjust: none;
 }
 
@@ -33,7 +34,7 @@ body {
   
   /* 폰트 및 기본 사이즈 */
   font-family: var(--font-sans);
-  font-size: 1.4rem; /* 14px */
+  font-size: 1.6rem; /* 16px */
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: antialiased;
