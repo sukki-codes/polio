@@ -11,8 +11,8 @@ reviews:
   auto_review:
     enabled: true
     drafts: false
+    auto_incremental_review: true
 
-  auto_incremental_review: true
   abort_on_close: true
 
   finishing_touches:
@@ -64,13 +64,3 @@ knowledge_base:
     scope: "auto"
   issues:
     scope: "auto"
-
-custom_commands:
-  - name: "portfolio-check"
-    description: "이 코드가 포트폴리오 관점에서 Best Practice인지 검토"
-    command: |
-      다음 관점에서 이 PR을 검토해줘:
-      1. 코드가 시니어 레벨의 가독성과 설계를 갖추고 있는가?
-      2. Next.js 15 / React Best Practice를 따르고 있는가?
-      3. 채용 담당자가 봤을 때 인상적인 포인트가 있는가?
-      4. 개선하면 더 매력적인 부분이 있다면 구체적으로 제안해줘.
