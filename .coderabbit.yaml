@@ -1,0 +1,66 @@
+version: "2"
+
+language: "ko-KR"
+
+reviews:
+  profile: "assertive"
+  request_changes_workflow: true
+  high_level_summary: true
+  poem: false
+
+  auto_review:
+    enabled: true
+    drafts: false
+    auto_incremental_review: true
+
+  abort_on_close: true
+
+  finishing_touches:
+    docstrings:
+      enabled: true
+
+  path_instructions:
+    - path: "src/components/common/**"
+      instructions: |
+        - 단일 책임 원칙(SRP) 준수 여부를 반드시 검토하라.
+        - Tailwind v4 @theme 변수 사용 여부를 확인하라.
+        - 'use client' 지시어가 불필요하게 사용되진 않았는지 검토하라.
+        - Props 타입은 interface가 아닌 type alias를 사용했는지 확인하라.
+
+    - path: "src/components/features/**"
+      instructions: |
+        - 비즈니스 로직이 컴포넌트에 직접 포함되어 있다면 hooks/로 분리할 것을 제안하라.
+        - Server Component 우선 설계가 적용되었는지 확인하라.
+
+    - path: "src/components/layout/**"
+      instructions: |
+        - 레이아웃 컴포넌트는 스타일링과 구조적 역할만 담당해야 한다. 비즈니스 로직 포함 여부를 검토하라.
+        - Next.js 15 layout.tsx 컨벤션과 충돌하지 않는지 확인하라.
+
+    - path: "src/app/**"
+      instructions: |
+        - Next.js 15 App Router 컨벤션(layout, page, loading, error)을 준수했는지 확인하라.
+        - metadata 또는 generateMetadata SEO 설정이 누락되지 않았는지 검토하라.
+        - Route Handler 사용 시 적절한 HTTP 메서드와 응답 형식을 따르는지 확인하라.
+
+    - path: "src/hooks/**"
+      instructions: |
+        - 훅의 이름이 use 접두사로 시작하는지 확인하라.
+        - 훅이 단일 관심사(Single Concern)만 처리하는지 검토하라.
+        - 불필요한 리렌더링을 유발하는 패턴(ex. 객체 참조 불일치)이 없는지 확인하라.
+
+    - path: "**/*.css"
+      instructions: |
+        - 이 프로젝트는 1rem = 10px 전략을 사용한다(:root { font-size: 62.5% }). px 단위 하드코딩이 있다면 rem 변환을 제안하라.
+        - Tailwind v4 @theme 지시어 내에 커스텀 디자인 토큰이 정의되어 있는지 확인하라.
+
+    - path: "docs/**"
+      instructions: |
+        - Architecture Decision Records 문서는 ADR 형식(Context / Decision / Consequences)을 따르는지 확인하라.
+        - 새로운 아키텍처 결정이 docs/Architecture-Decision-Records.md에 기록되었는지 확인하라.
+
+knowledge_base:
+  learnings:
+    scope: "auto"
+  issues:
+    scope: "auto"
