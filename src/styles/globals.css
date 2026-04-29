@@ -15,6 +15,16 @@
 
   /* Inter(next/font 주입) → Pretendard → fallback 순서 */
   --font-sans: var(--font-inter), "Pretendard Variable", "Noto Sans KR", sans-serif;
+
+  /* 폰트 사이즈 토큰 (1rem = 10px 기준으로 재정의) */
+  --text-xs: 1.2rem;
+  --text-sm: 1.4rem;
+  --text-base: 1.6rem;
+  --text-lg: 1.8rem;
+  --text-xl: 2rem;
+  --text-2xl: 2.4rem;
+  --text-3xl: 3rem;
+  --text-4xl: 3.6rem;
 }
 
 /* 1rem === 10px 설정 */
@@ -76,7 +86,7 @@ img, picture {
 /* 커스텀 유틸리티 */
 @utility dot-grid {
   background-image: radial-gradient(circle, rgb(15 23 42 / 0.06) 1px, transparent 1px);
-  background-size: 28px 28px;
+  background-size: 2.8rem 2.8rem;
 }
 
 @utility gradient-text {
@@ -88,15 +98,15 @@ img, picture {
 
 /* AI 컨셉 커스텀 스크롤바 */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 0.6rem;
 }
 ::-webkit-scrollbar-track {
   background: var(--color-bg-main);
 }
 ::-webkit-scrollbar-thumb {
   background: var(--color-primary);
-  border-radius: 10px;
+  border-radius: 1rem;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-accent);
-}
+

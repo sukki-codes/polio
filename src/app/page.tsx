@@ -6,9 +6,9 @@ export default function Home() {
 
       {/* 컬러 글로우 */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute left-1/2 top-1/2 h-640 w-5xl -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/8 blur-[130px]" />
-        <div className="absolute -bottom-60 -left-40 h-350 w-500 rounded-full bg-secondary/20 blur-[90px]" />
-        <div className="absolute -right-40 top-0 h-280 w-340 rounded-full bg-accent/5 blur-[70px]" />
+        <div className="absolute left-1/2 top-1/2 h-640 w-5xl -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/8 blur-[13rem]" />
+        <div className="absolute -bottom-60 -left-40 h-350 w-500 rounded-full bg-secondary/20 blur-[9rem]" />
+        <div className="absolute -right-40 top-0 h-280 w-340 rounded-full bg-accent/5 blur-[7rem]" />
       </div>
 
       {/* 메인 콘텐츠 */}
