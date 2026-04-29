@@ -22,9 +22,9 @@ export default function RootLayout({
   return (
     <html lang="ko" className={`${inter.variable} h-full`}>
       <body className="min-h-full flex flex-col">
-          <Header />
-          {children}
-        </body>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }

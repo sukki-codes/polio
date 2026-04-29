@@ -6,9 +6,9 @@ export default function Home() {
 
       {/* 컬러 글로우 */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute left-1/2 top-1/2 h-640 w-5xl -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/8 blur-[130px]" />
-        <div className="absolute -bottom-60 -left-40 h-350 w-500 rounded-full bg-secondary/20 blur-[90px]" />
-        <div className="absolute -right-40 top-0 h-280 w-340 rounded-full bg-accent/5 blur-[70px]" />
+        <div className="absolute left-1/2 top-1/2 h-640 w-640 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/8 blur-[13rem]" />
+        <div className="absolute -bottom-60 -left-40 h-350 w-500 rounded-full bg-secondary/20 blur-[9rem]" />
+        <div className="absolute -right-40 top-0 h-280 w-340 rounded-full bg-accent/5 blur-[7rem]" />
       </div>
 
       {/* 메인 콘텐츠 */}
@@ -35,7 +35,7 @@ export default function Home() {
 
         {/* CTA 버튼 */}
         <div className="mt-5 flex flex-col gap-8 sm:flex-row">
-          <button className="rounded-full bg-accent px-30 py-13 text-[1.4rem] font-semibold text-white shadow-lg shadow-accent/25 transition-all duration-200 hover:bg-[#7c3aed] hover:shadow-accent/40">
+          <button className="rounded-full bg-accent px-30 py-13 text-[1.4rem] font-semibold text-white shadow-lg shadow-accent/25 transition-all duration-200 hover:bg-accent-hover hover:shadow-accent/40">
             Get Started
           </button>
           <button className="rounded-full border border-black/10 px-30 py-13 text-[1.4rem] font-medium text-text-sub transition-all duration-200 hover:border-black/20 hover:bg-black/4 hover:text-text-main">

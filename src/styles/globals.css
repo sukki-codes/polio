@@ -9,6 +9,7 @@
   --color-primary: #0f172a;
   --color-secondary: #450a0a;
   --color-accent: #8b5cf6;
+  --color-accent-hover: #7c3aed;
   --color-bg-main: #f8f7ff;
   --color-text-main: #0f172a;
   --color-text-sub: #64748b;
@@ -75,8 +76,8 @@ img, picture {
 
 /* 커스텀 유틸리티 */
 @utility dot-grid {
-  background-image: radial-gradient(circle, rgb(15 23 42 / 0.06) 1px, transparent 1px);
-  background-size: 28px 28px;
+  background-image: radial-gradient(circle, rgb(15 23 42 / 0.06) 0.1rem, transparent 0.1rem);
+  background-size: 2.8rem 2.8rem;
 }
 
 @utility gradient-text {
@@ -88,15 +89,15 @@ img, picture {
 
 /* AI 컨셉 커스텀 스크롤바 */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 0.6rem;
 }
 ::-webkit-scrollbar-track {
   background: var(--color-bg-main);
 }
 ::-webkit-scrollbar-thumb {
   background: var(--color-primary);
-  border-radius: 10px;
+  border-radius: 1rem;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-accent);
-}
+
