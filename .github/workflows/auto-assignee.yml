@@ -1,0 +1,31 @@
+name: Auto Assignee
+
+on:
+  issues:
+    types: [opened]
+  pull_request:
+    types: [opened, reopened, ready_for_review]
+
+permissions:
+  pull-requests: write
+  issues: write
+
+jobs:
+  assign:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto assign to sukki-codes
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const isIssue = context.payload.issue !== undefined;
+            const number = isIssue
+              ? context.payload.issue.number
+              : context.payload.pull_request.number;
+
+            await github.rest.issues.addAssignees({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: number,
+              assignees: ['sukki-codes'],
+            });
