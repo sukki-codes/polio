@@ -14,6 +14,7 @@
   "stylelint.validate": ["css", "typescript", "typescriptreact"],
   "js/ts.format.enable": false,
   "css.lint.unknownAtRules": "ignore",
+  "tailwindCSS.lint.suggestCanonicalClasses": "ignore",
   "editor.formatOnSave": true,
   "cSpell.words": [
     "cx-suite",
