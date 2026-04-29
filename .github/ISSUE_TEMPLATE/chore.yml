@@ -1,0 +1,18 @@
+name: "🔧 Chore / Docs"
+description: "Config, tooling, refactor, documentation"
+labels: ["type: chore"]
+assignees: ["sukki-codes"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: What & Why
+      placeholder: "무엇을 설정/변경하고 왜 필요한지"
+    validations:
+      required: true
+  - type: textarea
+    id: todo
+    attributes:
+      label: Checklist
+      value: |
+        - [ ]

@@ -1,0 +1,22 @@
+name: "🐛 Bug"
+description: "Bug report"
+labels: ["type: bug"]
+assignees: ["sukki-codes"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      value: |
+        **Expected:** 
+        **Actual:** 
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      value: |
+        1.
+    validations:
+      required: true
