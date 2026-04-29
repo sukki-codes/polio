@@ -18,3 +18,5 @@ body:
       label: Steps to Reproduce
       value: |
         1.
+    validations:
+      required: true
