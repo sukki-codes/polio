@@ -22,7 +22,8 @@ export default function ThemeToggle() {
   return (
     <button
       type="button"
-      aria-label="Toggle color theme"
+      aria-pressed={isDark}
+      aria-label={isDark ? '라이트 모드로 전환' : '다크 모드로 전환'}
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
       className="group flex h-36 w-36 items-center justify-center rounded-full border border-[color:var(--color-border)] bg-[color:var(--color-surface-card)] text-[color:var(--color-text-sub)] shadow-[0_10px_30px_rgba(2,6,23,0.08)] transition duration-200 hover:-translate-y-0.5 hover:text-[color:var(--color-text-main)]"
     >

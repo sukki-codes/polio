@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Home() {
   return (
     <main className="relative flex flex-1 flex-col items-center justify-center overflow-hidden px-15 py-80">
@@ -28,12 +30,12 @@ export default function Home() {
         </p>
 
         <div className="mt-5 flex flex-col gap-8 sm:flex-row">
-          <button className="rounded-full bg-[color:var(--color-accent)] px-30 py-13 text-[1.4rem] font-semibold text-white shadow-[0_18px_45px_rgba(6,182,212,0.25)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[color:var(--color-accent-hover)]">
+          <Link href="#projects" className="rounded-full bg-[color:var(--color-accent)] px-30 py-13 text-[1.4rem] font-semibold text-white shadow-[0_18px_45px_rgba(6,182,212,0.25)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[color:var(--color-accent-hover)]">
             View Projects
-          </button>
-          <button className="rounded-full border border-[color:var(--color-border)] px-30 py-13 text-[1.4rem] font-medium text-[color:var(--color-text-sub)] transition-all duration-200 hover:border-[color:var(--color-accent)]/30 hover:bg-[color:var(--color-surface-card)] hover:text-[color:var(--color-text-main)]">
+          </Link>
+          <Link href="#approach" className="rounded-full border border-[color:var(--color-border)] px-30 py-13 text-[1.4rem] font-medium text-[color:var(--color-text-sub)] transition-all duration-200 hover:border-[color:var(--color-accent)]/30 hover:bg-[color:var(--color-surface-card)] hover:text-[color:var(--color-text-main)]">
             Explore Approach
-          </button>
+          </Link>
         </div>
       </div>
     </main>
