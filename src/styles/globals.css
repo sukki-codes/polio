@@ -2,27 +2,40 @@
 @import "tailwindcss";
 
 @theme {
-  /* 1 unit = 1px (0.1rem with 62.5% root) */
   --spacing: 0.1rem;
-
-  /* 테마 컬러 정의 (v4 방식) */
-  --color-primary: #0f172a;
-  --color-secondary: #450a0a;
-  --color-accent: #8b5cf6;
-  --color-accent-hover: #7c3aed;
-  --color-bg-main: #f8f7ff;
-  --color-text-main: #0f172a;
-  --color-text-sub: #64748b;
-
-  /* Inter(next/font 주입) → Pretendard → fallback 순서 */
   --font-sans: var(--font-inter), "Pretendard Variable", "Noto Sans KR", sans-serif;
 }
 
-/* 1rem === 10px 설정 */
 :root {
   font-size: 62.5%;
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
+  color-scheme: dark;
+
+  --color-primary: #0f172a;
+  --color-secondary: #1d4ed8;
+  --color-accent: #22d3ee;
+  --color-accent-hover: #06b6d4;
+  --color-bg-main: #060816;
+  --color-surface-elevated: rgba(10, 16, 31, 0.8);
+  --color-surface-card: rgba(11, 17, 32, 0.95);
+  --color-text-main: #f8fafc;
+  --color-text-sub: #9aa8c3;
+  --color-border: rgba(148, 163, 184, 0.18);
+}
+
+:root.light {
+  color-scheme: light;
+  --color-primary: #0f172a;
+  --color-secondary: #2563eb;
+  --color-accent: #0f766e;
+  --color-accent-hover: #115e59;
+  --color-bg-main: #f4f7ff;
+  --color-surface-elevated: rgba(255, 255, 255, 0.82);
+  --color-surface-card: rgba(255, 255, 255, 0.94);
+  --color-text-main: #07111f;
+  --color-text-sub: #516074;
+  --color-border: rgba(15, 23, 42, 0.12);
 }
 
 @layer base {
@@ -42,6 +55,7 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   h1, h2, h3, h4, h5, h6, p, button, input, textarea, select {
@@ -73,20 +87,18 @@
   }
 }
 
-/* 커스텀 유틸리티 */
 @utility dot-grid {
-  background-image: radial-gradient(circle, rgb(15 23 42 / 0.06) 0.1rem, transparent 0.1rem);
+  background-image: radial-gradient(circle, rgb(148 163 184 / 0.14) 0.1rem, transparent 0.1rem);
   background-size: 2.8rem 2.8rem;
 }
 
 @utility gradient-text {
-  background: linear-gradient(135deg, var(--color-text-main) 15%, var(--color-accent) 85%);
+  background: linear-gradient(135deg, var(--color-text-main) 10%, var(--color-accent) 85%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* AI 컨셉 커스텀 스크롤바 */
 ::-webkit-scrollbar {
   width: 0.6rem;
 }
