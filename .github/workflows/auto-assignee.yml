@@ -7,7 +7,6 @@ on:
     types: [opened, reopened, ready_for_review]
 
 permissions:
-  pull-requests: write
   issues: write
 
 jobs:
@@ -23,9 +22,13 @@ jobs:
               ? context.payload.issue.number
               : context.payload.pull_request.number;
 
-            await github.rest.issues.addAssignees({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: number,
-              assignees: ['sukki-codes'],
-            });
+            try {
+              await github.rest.issues.addAssignees({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: number,
+                assignees: ['sukki-codes'],
+              });
+            } catch (error) {
+              core.warning(`Auto-assign skipped: ${error.message}`);
+            }
