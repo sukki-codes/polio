@@ -75,6 +75,61 @@
 - 라이트 모드 기준으로 먼저 구축 후 `dark:` variant로 다크모드를 레이어링하는 전략 채택
 - Tailwind 내장 named size(`w-5xl` 등) 미사용 원칙 수립 → 모든 크기값을 @theme 토큰으로 관리 예정
 
+## 🎯 2026-04-29: CSS @layer base 전략 확정
+
+### Context
+
+- Tailwind v4 환경에서 전역 리셋 스타일을 레이어 없이 작성하면 Tailwind 유틸리티 클래스가 리셋 스타일을 오버라이드하지 못하는 우선순위 역전 문제 발생
+- 프로젝트가 내장 named size(`w-5xl` 등) 대신 숫자형 클래스를 canonical로 쓰는 원칙을 세웠으나 VSCode Tailwind LSP가 canonical 클래스로 바꾸라는 경고를 계속 표시해 노이즈 발생
+
+### Decision
+
+- 전역 리셋 스타일 전체를 `@layer base { ... }`로 감싸 Tailwind 레이어 우선순위 체계에 편입
+- VSCode 설정 `tailwindCSS.lint.suggestCanonicalClasses: "ignore"`로 numeric 클래스 제안 경고 억제
+
+### Consequences
+
+- Tailwind 유틸리티 클래스가 리셋 스타일보다 항상 높은 우선순위를 가지게 됨
+- `@layer base → components → utilities` 구조가 확립되어 이후 커스텀 스타일 추가 시 레이어 위치 결정 기준이 생김
+
+---
+
+## 🎯 2026-04-29: GitHub 이슈 템플릿 도입
+
+### Context
+
+- 혼자 진행하는 프로젝트지만 이슈를 체계적으로 분류하고 추적하기 위한 최소한의 구조가 필요했음
+
+### Decision
+
+- `.github/ISSUE_TEMPLATE/` 하위에 `bug.yml`, `feature.yml`, `chore.yml` 세 가지 YAML 기반 템플릿 추가
+- `bug.yml`에서 "재현 단계"를 필수 항목으로 지정해 불완전한 버그 리포트를 사전에 방지
+
+### Consequences
+
+- 이슈 유형이 세 가지로 명확히 분류되어 작업 성격(버그 수정 / 기능 추가 / 유지보수)이 한눈에 파악됨
+
+---
+
+## 🎯 2026-06-30: GitHub Actions 개발 워크플로우 자동화
+
+### Context
+
+- PR과 이슈를 열 때마다 수동으로 Assignee를 지정해야 하는 번거로움이 있었음
+- 의존성 업데이트를 수동으로 관리하면 보안 패치가 지연될 위험이 있었음
+
+### Decision
+
+- **Auto-assignee** (`auto-assignee.yml`): 이슈/PR이 열릴 때 `actions/github-script`로 `sukki-codes`를 자동 할당
+- **Dependabot** (`.github/dependabot.yml`): npm 패키지와 GitHub Actions 모두 주 1회 자동 업데이트 PR 생성, `open-pull-requests-limit: 10`
+
+### Consequences
+
+- 이슈/PR 생성 직후 Assignee가 자동 설정되어 트래킹 누락이 없어짐
+- 의존성 보안 패치가 주 단위로 자동 제안되어 관리 부담 감소
+
+---
+
 ## 🎯 2026-06-30: 글로벌 테마 시스템 및 다크/라이트 모드 인프라 구축
 
 ### Context
@@ -96,3 +151,47 @@
 - 다크/라이트 모드 전환이 전역적으로 일관되게 동작하게 되어 이후 섹션 확장 시 테마 토큰 재사용이 쉬워짐
 - 포트폴리오의 시각적 톤이 더 기술적이고 세련된 방향으로 정리됨
 - 향후 3D 히어로, 섹션 카드, CTA 등 UI 요소를 테마 토큰 기반으로 확장하기 쉬워짐
+
+---
+
+## 🎯 2026-07-01: Lint 도구 정비 — Stylelint 도입 및 ESLint v9 고정
+
+### Context
+
+- CSS 파일에 대한 린트 커버리지가 없어 Tailwind v4 전용 at-rule(`@theme`, `@utility` 등) 사용 시 표준 위반 여부를 자동으로 검증할 수 없었음
+- Dependabot이 ESLint를 v10으로 올린 뒤 `npm run lint`가 크래시하는 문제가 발생
+- Stylelint가 lint 스크립트와 별개로 운영되어 CI/pre-commit에서 CSS 오류가 누락될 위험이 있었음
+
+### Decision
+
+- **Stylelint 도입**: `stylelint-config-standard` 기반으로 `.stylelintrc.json` 추가; Tailwind v4 at-rule을 `ignoreAtRules`로 화이트리스트 처리, `import-notation: string` 강제; `ts/tsx` 파일 제외
+- **ESLint v9 고정**: ESLint v10이 `npm run lint` 실행 시 크래시를 일으키는 것을 확인 후 `^9`로 다운그레이드
+- **Lint 스크립트 통합**: `"lint": "eslint && npm run stylelint"`로 단일 진입점 유지
+
+### Consequences
+
+- `npm run lint` 한 번으로 TS/JS + CSS 모두 검사됨
+- Tailwind v4 전용 문법이 오탐되지 않으면서 실제 CSS 오류는 잡아냄
+- ESLint v10 호환성 문제 해결 전까지 dependabot의 v10 bump PR은 별도 검증 후 머지 필요
+
+---
+
+## 🎯 2026-07-01: PR Status-Check CI 워크플로우 도입
+
+### Context
+
+- 린트 도구를 정비했지만 PR 단계에서 자동으로 통과 여부를 검증하는 게이팅 장치가 없었음
+- 로컬에서 `npm run lint`를 실행하지 않은 채 머지될 경우 품질 기준이 우회될 수 있었음
+
+### Decision
+
+- `.github/workflows/static-analysis.yml` 추가: 모든 PR에서 ESLint → Stylelint → TypeScript 타입 체크를 순서대로 실행
+- `concurrency` 설정으로 같은 PR에 새 커밋이 푸시되면 이전 실행을 자동 취소해 리소스 낭비 방지
+- `actions/checkout`, `actions/setup-node` 모두 커밋 해시로 고정(핀닝)해 서플라이 체인 공격 방어
+- Node.js 버전은 24로 고정
+
+### Consequences
+
+- PR 머지 전에 린트·타입 오류가 반드시 통과되어야 하므로 코드 품질 게이팅이 자동화됨
+- 로컬 린트 실행을 잊어도 CI가 잡아줌
+- 워크플로우 파일의 Action 버전이 핀닝되어 예기치 않은 업스트림 변경에 영향을 받지 않음
