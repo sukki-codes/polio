@@ -4,13 +4,11 @@ export default function Home() {
   return (
     <main className="relative flex flex-1 flex-col items-center justify-center overflow-hidden px-15 py-80">
       <div className="dot-grid pointer-events-none absolute inset-0 opacity-60" />
-
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute left-1/2 top-1/2 h-640 w-640 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[color:var(--color-accent)]/10 blur-[13rem]" />
         <div className="absolute -bottom-60 -left-40 h-350 w-500 rounded-full bg-[color:var(--color-secondary)]/15 blur-[9rem]" />
         <div className="absolute -right-40 top-0 h-280 w-340 rounded-full bg-[color:var(--color-accent)]/8 blur-[7rem]" />
       </div>
-
       <div className="relative z-10 flex flex-col items-center gap-20 text-center">
         <div className="flex items-center gap-8 rounded-full border border-[color:var(--color-border)] bg-[color:var(--color-surface-card)]/80 px-16 py-7 shadow-[0_16px_50px_rgba(2,6,23,0.08)] backdrop-blur">
           <span className="h-7 w-7 animate-pulse rounded-full bg-[color:var(--color-accent)]" />
@@ -18,22 +16,19 @@ export default function Home() {
             Frontend Architect
           </span>
         </div>
-
         <h1 className="max-w-740 text-[4rem] font-bold leading-[1.12] tracking-[-0.02em] sm:text-[5.2rem] md:text-[6.4rem]">
           <span className="gradient-text">Systems</span>
           <br />
           <span className="text-[color:var(--color-text-main)]">that feel alive.</span>
         </h1>
-
         <p className="max-w-560 text-[1.6rem] leading-[1.8] text-[color:var(--color-text-sub)]">
           I design resilient frontend architecture, automation pipelines, and immersive digital experiences for ambitious products.
         </p>
-
         <div className="mt-5 flex flex-col gap-8 sm:flex-row">
-          <Link href="#projects" className="rounded-full bg-[color:var(--color-accent)] px-30 py-13 text-[1.4rem] font-semibold text-white shadow-[0_18px_45px_rgba(6,182,212,0.25)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[color:var(--color-accent-hover)]">
+          <Link className="rounded-full bg-[color:var(--color-accent)] px-30 py-13 text-[1.4rem] font-semibold text-white shadow-[0_18px_45px_rgba(6,182,212,0.25)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[color:var(--color-accent-hover)]" href="#projects">
             View Projects
           </Link>
-          <Link href="#approach" className="rounded-full border border-[color:var(--color-border)] px-30 py-13 text-[1.4rem] font-medium text-[color:var(--color-text-sub)] transition-all duration-200 hover:border-[color:var(--color-accent)]/30 hover:bg-[color:var(--color-surface-card)] hover:text-[color:var(--color-text-main)]">
+          <Link className="rounded-full border border-[color:var(--color-border)] px-30 py-13 text-[1.4rem] font-medium text-[color:var(--color-text-sub)] transition-all duration-200 hover:border-[color:var(--color-accent)]/30 hover:bg-[color:var(--color-surface-card)] hover:text-[color:var(--color-text-main)]" href="#approach">
             Explore Approach
           </Link>
         </div>
