@@ -23,6 +23,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
+    "eslint-import-resolver-typescript": "^4.4.5",
     "eslint-plugin-perfectionist": "^5.9.1",
     "stylelint": "^17.14.0",
     "stylelint-config-standard": "^40.0.0",

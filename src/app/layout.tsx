@@ -1,7 +1,9 @@
 import { ReactNode } from 'react'
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+
 import Header from "@components/layout/Header";
 import "@styles/globals.css";
 
@@ -21,7 +23,7 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="ko" suppressHydrationWarning className={`${inter.variable} h-full`}>
+    <html suppressHydrationWarning className={`${inter.variable} h-full`} lang="ko">
       <body className="min-h-full flex flex-col bg-[color:var(--color-bg-main)] text-[color:var(--color-text-main)] transition-colors duration-300">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <Header />

@@ -91,6 +91,9 @@ const eslintConfig = defineConfig([
     rules: {
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
+      // https://github.com/facebook/react/issues/34743
+      // 2026-07-01 기준 아직 overly strict 논의가 진행중이라 off 처리하겠습니다.
+      "react-hooks/set-state-in-effect": "off",
     },
   },
 
