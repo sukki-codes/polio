@@ -11,7 +11,7 @@
   ],
   "stylelint.enable": true,
   "stylelint.configFile": ".stylelintrc.json",
-  "stylelint.validate": ["css", "typescript", "typescriptreact"],
+  "stylelint.validate": ["css"],
   "js/ts.format.enable": false,
   "css.lint.unknownAtRules": "ignore",
   "tailwindCSS.lint.suggestCanonicalClasses": "ignore",
