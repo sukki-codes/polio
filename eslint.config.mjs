@@ -61,7 +61,7 @@ const eslintConfig = defineConfig([
       "perfectionist/sort-jsx-props": ["warn", {
         type: "alphabetical",
         order: "asc",
-        groups: ["key", "ref", "shorthand", "unknown", "multiline", "callback"],
+        groups: ["key", "ref", "shorthand-prop", "unknown", "multiline-prop", "callback"],
         customGroups: [
           { groupName: "key", elementNamePattern: "^key$" },
           { groupName: "ref", elementNamePattern: "^ref$" },
