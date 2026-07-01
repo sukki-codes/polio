@@ -1,0 +1,41 @@
+name: Static Analysis
+
+on:
+  pull_request:
+
+# 같은 PR에 새 커밋이 푸시되면 이전에 실행 중이던 워크플로우를 자동으로 취소한다.
+# group: 워크플로우 이름 + 브랜치명을 키로 삼아 동일 PR의 실행을 하나의 그룹으로 묶고,
+# cancel-in-progress: 새 실행이 시작될 때 같은 그룹의 진행 중인 실행을 중단시킨다.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  static-analysis:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js environment
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+        with:
+          node-version: 24
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: ESLint Run
+        run: npx eslint
+
+      - name: Stylelint Run
+        run: npm run stylelint
+
+      - name: Type-check with tsc
+        run: npm run tsc
