@@ -3,10 +3,12 @@ name: Static Analysis
 on:
   pull_request:
 
-# Uncomment below to cancel in-progress runs on the same PR when new commits are pushed
-# concurrency:
-#   group: ${{ github.workflow }}-${{ github.ref }}
-#   cancel-in-progress: true
+# 같은 PR에 새 커밋이 푸시되면 이전에 실행 중이던 워크플로우를 자동으로 취소한다.
+# group: 워크플로우 이름 + 브랜치명을 키로 삼아 동일 PR의 실행을 하나의 그룹으로 묶고,
+# cancel-in-progress: 새 실행이 시작될 때 같은 그룹의 진행 중인 실행을 중단시킨다.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
