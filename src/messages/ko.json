@@ -1,0 +1,17 @@
+{
+  "Header": {
+    "home": "홈"
+  },
+  "Hero": {
+    "badge": "Frontend Architect",
+    "titleLine1": "Complex problems,",
+    "titleLine2": "Structured systems.",
+    "subtitle": "어려운 문제를 구조로 풀고, 없던 체계를 만드는 프론트엔드 엔지니어.",
+    "ctaPrimary": "프로젝트 보기",
+    "ctaSecondary": "접근 방식 살펴보기"
+  },
+  "LocaleSwitcher": {
+    "switchToEn": "Switch to English",
+    "switchToKo": "한국어로 전환"
+  }
+}
