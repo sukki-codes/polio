@@ -195,3 +195,31 @@
 - PR 머지 전에 린트·타입 오류가 반드시 통과되어야 하므로 코드 품질 게이팅이 자동화됨
 - 로컬 린트 실행을 잊어도 CI가 잡아줌
 - 워크플로우 파일의 Action 버전이 핀닝되어 예기치 않은 업스트림 변경에 영향을 받지 않음
+
+---
+
+## 🎯 2026-07-02: SVG Sprite 시스템 도입
+
+### Context
+
+- 아이콘을 컴포넌트마다 개별 import하면 번들 크기가 커지고 관리가 분산됨
+- 이 프로젝트는 `dev`는 Webpack(`next dev --webpack`), `build`는 Turbopack(Next 16 기본값)을 각각 사용해, SVGR처럼 번들러 로더에 의존하는 svg-to-component 방식은 두 번들러 설정을 각각 만들고 계속 동기화해야 하는 부담이 있음
+- 다크/라이트 테마 전환 인프라(2026-06-30 ADR)가 이미 있어 아이콘도 `currentColor` 기반으로 테마 토큰과 자연스럽게 연동될 필요가 있음
+- CodeRabbit path instructions로 Server Component 우선 설계를 지향하는데, 검토했던 대안(Portal로 심볼을 런타임에 DOM에 주입하는 방식)은 client mount가 필요해 SSR 이점이 사라지고 초기 렌더에 아이콘 깜빡임(FOIC)이 생길 수 있음
+
+### Decision
+
+- `scripts/build-svg-sprite.mts`: `src/icons/*.svg` 원본을 스캔해 `<symbol>`로 묶은 단일 `public/sprites.svg`를 생성하는 빌드타임 스크립트 도입. Node 24의 네이티브 TypeScript 실행 지원을 활용해 별도 트랜스파일 없이 `.mts`로 작성(`tsc` 타입체크 대상에도 포함)
+- `npm run icons`로 실행하며 `predev`/`prebuild`에 연결해 항상 최신 sprite를 보장
+- 생성된 `public/sprites.svg`는 `.gitignore`에 추가해 버전관리 대상에서 제외 — 단일 소스는 `src/icons/*.svg`
+- `src/components/common/Icon.tsx` 공통 컴포넌트 추가: `<svg><use href="/sprites.svg#icon-{name}" /></svg>`를 렌더링하는 서버 컴포넌트로, 번들러나 클라이언트 마운트에 의존하지 않음
+- 아이콘 소스는 `fill="none" stroke="currentColor"` 기반으로 작성해 테마 토큰 색상을 그대로 상속받도록 함
+- `ThemeToggle`의 인라인 sun/moon SVG를 `Icon` 컴포넌트로 교체해 실사용 검증
+
+### Consequences
+
+- `src/icons/`에 svg 파일만 추가하면 별도 등록 없이 sprite에 자동 반영됨
+- Turbopack/Webpack 번들러 차이에 영향받지 않는 아이콘 파이프라인 확보
+- 브라우저가 `sprites.svg`를 최초 1회만 캐싱하므로 이후 페이지 이동 시 재다운로드가 없음
+- 서버 컴포넌트로 아이콘을 렌더링할 수 있어 SSR 시점에 바로 아이콘이 보이고 클라이언트 마운트를 기다릴 필요가 없음
+- 아이콘 개수가 늘어나면 `Icon.tsx`의 `IconName` 유니언 타입을 수동으로 유지보수해야 함 — 개수가 많아지면 codegen 도입을 재검토

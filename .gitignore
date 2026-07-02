@@ -17,6 +17,9 @@
 /.next/
 /out/
 
+# generated svg sprite
+/public/sprites.svg
+
 # production
 /build
 
