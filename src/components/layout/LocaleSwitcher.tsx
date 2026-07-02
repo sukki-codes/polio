@@ -3,19 +3,16 @@
 import { useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 
-import { getPathname, usePathname } from '@/i18n/navigation';
-
 export default function LocaleSwitcher() {
   const locale = useLocale();
-  const pathname = usePathname();
   const router = useRouter();
   const t = useTranslations('LocaleSwitcher');
 
   const nextLocale = locale === 'ko' ? 'en' : 'ko';
 
   const handleClick = () => {
-    document.cookie = `NEXT_LOCALE=${nextLocale}; path=/; SameSite=lax`;
-    router.replace(getPathname({ href: pathname, locale: nextLocale }));
+    document.cookie = `NEXT_LOCALE=${nextLocale}; path=/; max-age=31536000; SameSite=lax`;
+    router.refresh();
   };
 
   return (

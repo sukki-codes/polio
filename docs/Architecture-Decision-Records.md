@@ -234,13 +234,15 @@
 ### Decision
 
 - **라이브러리**: `next-intl`(v4)을 선정. `next-i18next`는 원래 Pages Router 중심 라이브러리라 App Router 지원이 v16에서야 추가됐고 `i18next`/`react-i18next` 런타임 의존성이 추가로 필요한 반면, `next-intl`은 App Router 전용으로 설계돼 RSC를 네이티브 지원하고 의존성이 가벼움. 이 프로젝트가 지금까지 `next-themes` 하나만 신중하게 추가해온 미니멀한 의존성 기조와도 맞음. `next-intl`의 peerDependencies가 `next: ^16.0.0`을 명시적으로 지원함을 npm에서 확인
-- **URL 구조**: `localePrefix: 'as-needed'` 채택 — 기본 언어(`ko`)는 프리픽스 없이 `/about`처럼 노출되어 PORTFOLIO-SPEC 사이트맵과 일치하고, 영어는 `/en/about`으로 프리픽스가 붙음. `defaultLocale: 'ko'`
+- **URL 구조**: `localePrefix: 'never'` 채택 — 언어와 무관하게 URL은 항상 PORTFOLIO-SPEC 사이트맵과 동일(`/about` 등)하고, locale은 URL이 아니라 `NEXT_LOCALE` 쿠키(+최초 방문 시 `Accept-Language`)로만 판단해 미들웨어가 내부적으로만 rewrite함. `defaultLocale: 'ko'`
+  - 처음엔 `as-needed`(기본 언어만 프리픽스 생략, 영어는 `/en/about`)로 시작했으나, 영어로 전환해도 URL이 안 바뀌길 원하는 게 실제 요구사항이었음이 확인돼 `never`로 변경
+  - 트레이드오프: 언어별로 별도 URL이 없어 검색엔진이 ko/en 페이지를 따로 색인하지 못함(다국어 SEO 불리). 포트폴리오 사이트 특성상 감수하기로 함
 - **라우팅 구조**: `src/app/[locale]/layout.tsx`를 루트 레이아웃으로 승격(`app/layout.tsx` 별도 유지 안 함), `src/app/[locale]/page.tsx`로 Hero 이동. `hasLocale`로 유효하지 않은 locale은 `notFound()` 처리
 - **Proxy**: `src/proxy.ts`에 `next-intl/middleware`의 `createMiddleware(routing)`을 `export default` — Next 16의 `proxy.ts` 컨벤션을 그대로 따르되 함수명은 바꾸지 않아도 동작함을 확인
 - **설정 위치**: `src/i18n/routing.ts`(locale 목록/기본값), `src/i18n/request.ts`(요청별 메시지 로딩), `src/i18n/navigation.ts`(locale-aware `Link`/`useRouter`/`usePathname`)로 분리
 - **메시지 파일**: `src/messages/ko.json`, `src/messages/en.json` (프로젝트 전체가 `src/` 기반 구조를 따르므로 루트의 `messages/` 대신 `src/messages/`에 배치)
 - **Header 내비게이션**: `next/link` 대신 `@/i18n/navigation`의 `Link`로 교체해 라우팅 시 locale이 유지되도록 함
-- **언어 전환 UI**: `src/components/layout/LocaleSwitcher.tsx` 추가 — `ThemeToggle`과 동일한 시각적 패턴(다음 상태를 보여주는 pill 버튼)으로 헤더에 배치
+- **언어 전환 UI**: `src/components/layout/LocaleSwitcher.tsx` 추가 — `ThemeToggle`과 동일한 시각적 패턴(다음 상태를 보여주는 pill 버튼)으로 헤더에 배치. `localePrefix: 'never'`라 URL이 바뀌지 않으므로, 클릭 시 `NEXT_LOCALE` 쿠키만 갱신하고 `router.refresh()`로 같은 경로에서 서버 컴포넌트를 다시 렌더링함
 - **Hero 카피 정리**: 기존 구현 카피("Systems that feel alive.")가 PORTFOLIO-SPEC에 정의된 공식 카피("Complex problems, Structured systems.")와 달랐던 것을 이번에 공식 카피로 맞춤. 영어 헤드라인은 두 언어 모두 동일하게 유지하고(브랜드 태그라인), 서브카피만 언어별로 번역
 
 ### Consequences
