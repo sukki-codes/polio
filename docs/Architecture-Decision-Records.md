@@ -195,3 +195,31 @@
 - PR 머지 전에 린트·타입 오류가 반드시 통과되어야 하므로 코드 품질 게이팅이 자동화됨
 - 로컬 린트 실행을 잊어도 CI가 잡아줌
 - 워크플로우 파일의 Action 버전이 핀닝되어 예기치 않은 업스트림 변경에 영향을 받지 않음
+
+---
+
+## 🎯 2026-07-02: i18n(ko/en) 인프라 도입
+
+### Context
+
+- 포트폴리오를 해외 채용 담당자에게도 노출하려면 한국어/영어 2개 언어 지원이 필요했음
+- 이 프로젝트의 Next.js 16.2.9는 `middleware.ts`가 `proxy.ts`로 이름이 바뀐 breaking change가 있어(2026-06-30 이전 세션 확인), 라이브러리가 이 컨벤션을 지원하는지 사전 확인이 필요했음
+
+### Decision
+
+- **라이브러리**: `next-intl`(v4)을 선정. `next-i18next`는 원래 Pages Router 중심 라이브러리라 App Router 지원이 v16에서야 추가됐고 `i18next`/`react-i18next` 런타임 의존성이 추가로 필요한 반면, `next-intl`은 App Router 전용으로 설계돼 RSC를 네이티브 지원하고 의존성이 가벼움. 이 프로젝트가 지금까지 `next-themes` 하나만 신중하게 추가해온 미니멀한 의존성 기조와도 맞음. `next-intl`의 peerDependencies가 `next: ^16.0.0`을 명시적으로 지원함을 npm에서 확인
+- **URL 구조**: `localePrefix: 'as-needed'` 채택 — 기본 언어(`ko`)는 프리픽스 없이 `/about`처럼 노출되어 PORTFOLIO-SPEC 사이트맵과 일치하고, 영어는 `/en/about`으로 프리픽스가 붙음. `defaultLocale: 'ko'`
+- **라우팅 구조**: `src/app/[locale]/layout.tsx`를 루트 레이아웃으로 승격(`app/layout.tsx` 별도 유지 안 함), `src/app/[locale]/page.tsx`로 Hero 이동. `hasLocale`로 유효하지 않은 locale은 `notFound()` 처리
+- **Proxy**: `src/proxy.ts`에 `next-intl/middleware`의 `createMiddleware(routing)`을 `export default` — Next 16의 `proxy.ts` 컨벤션을 그대로 따르되 함수명은 바꾸지 않아도 동작함을 확인
+- **설정 위치**: `src/i18n/routing.ts`(locale 목록/기본값), `src/i18n/request.ts`(요청별 메시지 로딩), `src/i18n/navigation.ts`(locale-aware `Link`/`useRouter`/`usePathname`)로 분리
+- **메시지 파일**: `src/messages/ko.json`, `src/messages/en.json` (프로젝트 전체가 `src/` 기반 구조를 따르므로 루트의 `messages/` 대신 `src/messages/`에 배치)
+- **Header 내비게이션**: `next/link` 대신 `@/i18n/navigation`의 `Link`로 교체해 라우팅 시 locale이 유지되도록 함
+- **언어 전환 UI**: `src/components/layout/LocaleSwitcher.tsx` 추가 — `ThemeToggle`과 동일한 시각적 패턴(다음 상태를 보여주는 pill 버튼)으로 헤더에 배치
+- **Hero 카피 정리**: 기존 구현 카피("Systems that feel alive.")가 PORTFOLIO-SPEC에 정의된 공식 카피("Complex problems, Structured systems.")와 달랐던 것을 이번에 공식 카피로 맞춤. 영어 헤드라인은 두 언어 모두 동일하게 유지하고(브랜드 태그라인), 서브카피만 언어별로 번역
+
+### Consequences
+
+- 기본 언어 URL이 PORTFOLIO-SPEC 사이트맵과 그대로 일치해 기존 문서·링크 구조를 재작성할 필요가 없음
+- 이후 페이지(`/about`, `/projects` 등)를 추가할 때도 `src/app/[locale]/` 하위에 만들면 자동으로 i18n이 적용됨
+- 새 텍스트를 추가할 때는 `src/messages/ko.json`과 `en.json`에 동일한 키를 반드시 함께 추가해야 함 — 누락 시 `next-intl`이 빌드/런타임에 에러를 발생시켜 조기에 발견 가능
+- Hero 카피가 PORTFOLIO-SPEC과 다시 일치하게 되어 문서와 실제 구현 간의 드리프트가 해소됨
