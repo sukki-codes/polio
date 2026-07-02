@@ -1,0 +1,17 @@
+{
+  "Header": {
+    "home": "Home"
+  },
+  "Hero": {
+    "badge": "Frontend Architect",
+    "titleLine1": "Complex problems,",
+    "titleLine2": "Structured systems.",
+    "subtitle": "A frontend engineer who solves hard problems with structure and builds systems that didn't exist before.",
+    "ctaPrimary": "View Projects",
+    "ctaSecondary": "Explore Approach"
+  },
+  "LocaleSwitcher": {
+    "switchToEn": "Switch to English",
+    "switchToKo": "한국어로 전환"
+  }
+}
