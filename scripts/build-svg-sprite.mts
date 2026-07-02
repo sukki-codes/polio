@@ -5,7 +5,7 @@ const ICONS_DIR = path.join(process.cwd(), "src/icons");
 const OUTPUT_FILE = path.join(process.cwd(), "public/sprites.svg");
 
 const SVG_TAG_PATTERN = /<svg([^>]*)>([\s\S]*)<\/svg>/;
-const STRIPPED_ATTRS_PATTERN = /\s(xmlns|width|height)="[^"]*"/g;
+const STRIPPED_ATTRS_PATTERN = /\s(xmlns|width|height|id)="[^"]*"/g;
 
 async function buildSprite(): Promise<void> {
   const files = (await readdir(ICONS_DIR)).filter((file) => file.endsWith(".svg"));
