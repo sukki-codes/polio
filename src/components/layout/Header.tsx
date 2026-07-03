@@ -11,9 +11,9 @@ export default async function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-[color:var(--color-border)] bg-[color:var(--color-surface-elevated)]/80 backdrop-blur-sm">
+    <header className="sticky top-0 z-[var(--z-header)] w-full border-b border-[color:var(--color-border)] bg-[color:var(--color-surface-elevated)]/80 backdrop-blur-sm">
       <div className="mx-auto flex h-40 max-w-800 items-center justify-between px-15">
-        <Link className="text-[1.8rem] font-semibold tracking-tight text-[color:var(--color-text-main)]" href="/">
+        <Link className="text-xl font-semibold tracking-tight text-[color:var(--color-text-main)]" href="/">
           Polio
         </Link>
         <div className="flex items-center gap-12">
@@ -22,7 +22,7 @@ export default async function Header() {
               {NAV_LINKS.map(({ label, href }) => (
                 <li key={href}>
                   <Link
-                    className="text-[1.4rem] text-[color:var(--color-text-sub)] transition-colors hover:text-[color:var(--color-text-main)]"
+                    className="text-base text-[color:var(--color-text-sub)] transition-colors hover:text-[color:var(--color-text-main)]"
                     href={href}
                   >
                     {label}
