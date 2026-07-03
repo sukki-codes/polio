@@ -1,7 +1,13 @@
 import Link from 'next/link';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 
-export default async function Home() {
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export default async function Home({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations('Hero');
 
   return (
