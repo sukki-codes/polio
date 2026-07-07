@@ -4,7 +4,8 @@
     "description": "복잡한 문제를 구조로 풀고, 없던 체계를 만드는 프론트엔드 엔지니어 숙현의 포트폴리오입니다."
   },
   "Header": {
-    "home": "홈"
+    "home": "홈",
+    "about": "소개"
   },
   "Hero": {
     "badge": "Frontend Architect",
@@ -17,5 +18,108 @@
   "LocaleSwitcher": {
     "switchToEn": "Switch to English",
     "switchToKo": "한국어로 전환"
+  },
+  "About": {
+    "metaTitle": "소개",
+    "metaDescription": "숙현의 커리어 타임라인과 소프트웨어를 대하는 태도.",
+    "eyebrow": "About",
+    "heading": "어떤 태도로 소프트웨어를 대하는가",
+    "intro": "제조 현장의 엔지니어에서 프론트엔드 엔지니어로 전환하며 배운 건, 없던 체계를 만들고 복잡한 문제를 구조로 풀어내는 태도였습니다.",
+    "timeline": {
+      "title": "Timeline",
+      "items": [
+        {
+          "period": "~2021",
+          "title": "LG Display 공장 엔지니어",
+          "description": "제조 현장에서 문제를 가까이 마주하며 일함"
+        },
+        {
+          "period": "2023~",
+          "title": "Full-stack Development Immersion",
+          "description": "독학과 부트캠프를 통한 기술적 전환기"
+        },
+        {
+          "period": "2025~",
+          "title": "Medit — 웹 프론트엔드 엔지니어",
+          "description": "시스템 구축과 메인 피처 리드"
+        }
+      ]
+    },
+    "highlights": {
+      "title": "혼자 시작한 것들",
+      "items": [
+        {
+          "title": "GitHub Actions 공용 레포 구축",
+          "description": "팀 전체 레포에 적용된 공용 워크플로를 처음부터 설계하고 구축함"
+        },
+        {
+          "title": "react-components 패키지 최초 배포",
+          "description": "컴포넌트의 50% 이상을 기여한 사내 공용 컴포넌트 패키지"
+        },
+        {
+          "title": "MOS Web Portal 0부터 세팅",
+          "description": "CLI 없이 프로젝트 구조를 처음부터 설계하고 구축함"
+        }
+      ]
+    },
+    "techStack": {
+      "title": "Tech Stack",
+      "categories": [
+        {
+          "title": "Frontend",
+          "items": [
+            { "name": "React", "description": "React 19 Beta 선행 도입 및 아키텍처 검토 경험" },
+            { "name": "TypeScript", "description": "명시적 타입 선언을 통한 엄격한 타입 안정성 확보" },
+            { "name": "Next.js", "description": "개인 프로젝트 및 아키텍처 검토" },
+            { "name": "Vanilla Extract", "description": "정적 스타일링 및 제로 런타임 CSS 기술 스택" },
+            { "name": "Emotion / styled-components", "description": "CSS-in-JS 스타일링 아키텍처 고도화" },
+            { "name": "Tailwind CSS", "description": "빌드 산출물 비교 및 전환 경험" },
+            { "name": "MUI", "description": "상용 패키지 대규모 마이그레이션 및 커스텀 컴포넌트 대체 경험" },
+            { "name": "HTML5 / CSS3 / Web 표준", "description": "window.print, Print CSS 인프라 구축" },
+            { "name": "3D Canvas / WebGL", "description": "사내 3D 렌더링 모듈 연동 및 런타임 성능 최적화 경험" }
+          ]
+        },
+        {
+          "title": "State Management & Data Fetching",
+          "items": [
+            { "name": "React Query", "description": "서버 상태 동기화 및 캐싱 전략 수립" },
+            { "name": "Zustand", "description": "경량화된 전사 전역 상태 관리 체계 설계" },
+            { "name": "React Hooks", "description": "무한 스크롤, 상태 제어 등 전사 공통 커스텀 훅 패키지 단독 개발" }
+          ]
+        },
+        {
+          "title": "Tooling & API Automation",
+          "items": [
+            { "name": "Orval", "description": "OpenAPI 스펙 기반 API 코드 자동 생성 스크립트 구축 및 DX 개선" },
+            { "name": "Vite", "description": "빌드 및 개발 환경 생산성 개선" },
+            { "name": "modern-screenshot / html-to-image", "description": "웹 화면 캡처 및 PDF 렌더링 엔진 기술 검토" },
+            { "name": "Nx", "description": "Micro Frontend Architecture(MFA) 도입을 위한 모노레포 빌드 시스템 검토" }
+          ]
+        },
+        {
+          "title": "Testing & Quality Control",
+          "items": [
+            { "name": "Vitest", "description": "jsdom 기반 컴포넌트 단위 테스트 환경 구축" },
+            { "name": "Playwright", "description": "E2E 테스트 자동화 및 시나리오 구축" },
+            { "name": "ESLint / Stylistic", "description": "코드 정적 분석 및 포맷팅 컨벤션 표준화" }
+          ]
+        },
+        {
+          "title": "Infra & DevOps (CI/CD)",
+          "items": [
+            { "name": "GitHub Actions", "description": "정적 분석, PR 워크플로우 자동화" },
+            { "name": "Semantic Release", "description": "커밋 기반 자동 버전 관리 및 NPM/GitHub Package Registry 배포 자동화" },
+            { "name": "Git / GitHub", "description": "브랜치 전략 운영 및 기민한 코드 리뷰 문화 주도" }
+          ]
+        },
+        {
+          "title": "Collaboration & Domain",
+          "items": [
+            { "name": "Jira / Slack / Figma", "description": "디자인 시안 분석 및 컴포넌트 단위 매핑 협업" },
+            { "name": "도메인 이해도", "description": "대규모 데이터 중심의 논리적 사고 및 공정/운영 프로세스 이해도 (이전 엔지니어링 경력 기반)" }
+          ]
+        }
+      ]
+    }
   }
 }

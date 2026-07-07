@@ -4,7 +4,8 @@
     "description": "Portfolio of Sukhyeon, a frontend engineer who solves hard problems with structure and builds systems that didn't exist before."
   },
   "Header": {
-    "home": "Home"
+    "home": "Home",
+    "about": "About"
   },
   "Hero": {
     "badge": "Frontend Architect",
@@ -17,5 +18,108 @@
   "LocaleSwitcher": {
     "switchToEn": "Switch to English",
     "switchToKo": "한국어로 전환"
+  },
+  "About": {
+    "metaTitle": "About",
+    "metaDescription": "Sukhyeon's career timeline and attitude toward software.",
+    "eyebrow": "About",
+    "heading": "The attitude I bring to software",
+    "intro": "Moving from a factory engineer to a frontend engineer taught me an attitude: turn hard problems into structure, and build systems that didn't exist before.",
+    "timeline": {
+      "title": "Timeline",
+      "items": [
+        {
+          "period": "~2021",
+          "title": "Factory Engineer, LG Display",
+          "description": "Worked close to real problems on the manufacturing floor"
+        },
+        {
+          "period": "2023~",
+          "title": "Full-stack Development Immersion",
+          "description": "A technical turning point through self-study and a bootcamp"
+        },
+        {
+          "period": "2025~",
+          "title": "Medit — Frontend Engineer",
+          "description": "Building systems and leading core features"
+        }
+      ]
+    },
+    "highlights": {
+      "title": "Things I started on my own",
+      "items": [
+        {
+          "title": "Built a shared GitHub Actions repo",
+          "description": "Designed and built the shared workflows now adopted across every team repo"
+        },
+        {
+          "title": "First release of the react-components package",
+          "description": "An internal shared component package I contributed over 50% of the components to"
+        },
+        {
+          "title": "Set up MOS Web Portal from scratch",
+          "description": "Designed and built the project structure from zero, without a CLI"
+        }
+      ]
+    },
+    "techStack": {
+      "title": "Tech Stack",
+      "categories": [
+        {
+          "title": "Frontend",
+          "items": [
+            { "name": "React", "description": "Early adoption of React 19 Beta and architecture review" },
+            { "name": "TypeScript", "description": "Strict type safety through explicit type declarations" },
+            { "name": "Next.js", "description": "Personal projects and architecture evaluation" },
+            { "name": "Vanilla Extract", "description": "Static styling and zero-runtime CSS stack" },
+            { "name": "Emotion / styled-components", "description": "Advanced CSS-in-JS styling architecture" },
+            { "name": "Tailwind CSS", "description": "Build output comparison and migration experience" },
+            { "name": "MUI", "description": "Large-scale migration off a commercial package and custom component replacement" },
+            { "name": "HTML5 / CSS3 / Web Standards", "description": "Built window.print and Print CSS infrastructure" },
+            { "name": "3D Canvas / WebGL", "description": "Integrated an in-house 3D rendering module and optimized runtime performance" }
+          ]
+        },
+        {
+          "title": "State Management & Data Fetching",
+          "items": [
+            { "name": "React Query", "description": "Server state synchronization and caching strategy" },
+            { "name": "Zustand", "description": "Designed a lightweight, org-wide global state system" },
+            { "name": "React Hooks", "description": "Solo-built a company-wide custom hooks package (infinite scroll, state control, etc.)" }
+          ]
+        },
+        {
+          "title": "Tooling & API Automation",
+          "items": [
+            { "name": "Orval", "description": "Built OpenAPI-spec-based API code generation, improving DX" },
+            { "name": "Vite", "description": "Improved build and dev environment productivity" },
+            { "name": "modern-screenshot / html-to-image", "description": "Evaluated web screen capture and PDF rendering engines" },
+            { "name": "Nx", "description": "Evaluated a monorepo build system for Micro Frontend Architecture (MFA)" }
+          ]
+        },
+        {
+          "title": "Testing & Quality Control",
+          "items": [
+            { "name": "Vitest", "description": "Built a jsdom-based component unit test environment" },
+            { "name": "Playwright", "description": "E2E test automation and scenario design" },
+            { "name": "ESLint / Stylistic", "description": "Standardized static analysis and formatting conventions" }
+          ]
+        },
+        {
+          "title": "Infra & DevOps (CI/CD)",
+          "items": [
+            { "name": "GitHub Actions", "description": "Automated static analysis and PR workflows" },
+            { "name": "Semantic Release", "description": "Commit-based automatic versioning and NPM/GitHub Package Registry publishing" },
+            { "name": "Git / GitHub", "description": "Led branch strategy and an agile code review culture" }
+          ]
+        },
+        {
+          "title": "Collaboration & Domain",
+          "items": [
+            { "name": "Jira / Slack / Figma", "description": "Collaborated on design-spec analysis and component-level mapping" },
+            { "name": "Domain Insight", "description": "Data-driven logical thinking and process/operations understanding from a prior engineering career" }
+          ]
+        }
+      ]
+    }
   }
 }

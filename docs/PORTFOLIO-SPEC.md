@@ -72,6 +72,44 @@ Complex problems, Structured systems.
   - MOS Web Portal 프로젝트 CLI 없이 0부터 세팅
 - 기술 스택 섹션 (카테고리별 정리)
 
+**Tech Stack 상세**
+
+### 🌐 Frontend (Core & Libraries)
+* React (React 19 Beta 선행 도입 및 아키텍처 검토 경험)
+* TypeScript (명시적 타입 선언을 통한 엄격한 타입 안정성 확보)
+* Next.js (개인 프로젝트 및 아키텍처 검토)
+* Vanilla Extract (정적 스타일링 및 제로 런타임 CSS 기술 스택)
+* Emotion / styled-components (CSS-in-JS 스타일링 아키텍처 고도화)
+* Tailwind CSS (빌드 산출물 비교 및 전환 경험)
+* MUI (Material UI - 상용 패키지 대규모 마이그레이션 및 커스텀 컴포넌트 대체 경험)
+* HTML5 / CSS3 / Web 표준 (window.print, Print CSS 인프라 구축)
+* 3D Canvas / WebGL (사내 3D 렌더링 모듈 연동 및 런타임 성능 최적화 경험)
+
+### 📦 State Management & Data Fetching
+* React Query (TanStack Query - 서버 상태 동기화 및 캐싱 전략 수립)
+* Zustand (경량화된 전사 전역 상태 관리 체계 설계)
+* React Hooks (무한 스크롤, 상태 제어 등 전사 공통 커스텀 훅 패키지 단독 개발)
+
+### 🛠️ Tooling & API Automation
+* Orval (OpenAPI 스펙 기반 API 코드 자동 생성 스크립트 구축 및 DX 개선)
+* Vite (빌드 및 개발 환경 생산성 개선)
+* modern-screenshot / html-to-image (웹 화면 캡처 및 PDF 렌더링 엔진 기술 검토)
+* Nx (Micro Frontend Architecture - MFA 도입을 위한 모노레포 빌드 시스템 검토)
+
+### 🧪 Testing & Quality Control
+* Vitest (jsdom 기반 컴포넌트 단위 테스트 환경 구축)
+* Playwright (E2E 테스트 자동화 및 시나리오 구축)
+* ESLint / Stylistic (코드 정적 분석 및 포맷팅 컨벤션 표준화)
+
+### 🚀 Infra & DevOps (CI/CD)
+* GitHub Actions (정적 분석, PR 워크플로우 자동화)
+* Semantic Release (커밋 기반 자동 버전 관리 및 NPM/GitHub Package Registry 배포 자동화)
+* Git / GitHub (브랜치 전략 운영 및 기민한 코드 리뷰 문화 주도)
+
+### 📊 Collaboration & Domain
+* Jira / Slack / Figma (디자인 시안 분석 및 컴포넌트 단위 매핑 협업)
+* 대규모 데이터 중심의 논리적 사고 및 공정/운영 프로세스 이해도 (이전 엔지니어링 경력 기반)
+
 ---
 
 ### 3. `/projects` — Projects
