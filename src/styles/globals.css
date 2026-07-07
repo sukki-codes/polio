@@ -32,9 +32,9 @@
 
   /* radius/breakpoint: Tailwind 기본 스케일 그대로 사용, 별도 커스텀 불필요 (필요 시 추가) */
 
-  --shadow-control: 0 10px 30px rgb(2 6 23 / 8%);
-  --shadow-badge: 0 16px 50px rgb(2 6 23 / 8%);
-  --shadow-glow-accent: 0 18px 45px rgb(6 182 212 / 25%);
+  --shadow-control: 0 1rem 3rem rgb(2 6 23 / 8%);
+  --shadow-badge: 0 1.6rem 5rem rgb(2 6 23 / 8%);
+  --shadow-glow-accent: 0 1.8rem 4.5rem rgb(6 182 212 / 25%);
 }
 
 :root {
