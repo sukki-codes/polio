@@ -8,6 +8,7 @@
       }
     ],
     "import-notation": "string",
-    "property-no-vendor-prefix": null
+    "property-no-vendor-prefix": null,
+    "custom-property-pattern": null
   }
 }
