@@ -1,5 +1,6 @@
-import Link from 'next/link';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
+
+import { Link } from '@/i18n/navigation';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -37,7 +38,7 @@ export default async function Home({ params }: Props) {
           <Link className="rounded-full bg-[color:var(--color-accent)] px-30 py-13 text-base font-semibold text-white shadow-glow-accent transition-all duration-200 hover:-translate-y-0.5 hover:bg-[color:var(--color-accent-hover)]" href="#projects">
             {t('ctaPrimary')}
           </Link>
-          <Link className="rounded-full border border-[color:var(--color-border)] px-30 py-13 text-base font-medium text-[color:var(--color-text-sub)] transition-all duration-200 hover:border-[color:var(--color-accent)]/30 hover:bg-[color:var(--color-surface-card)] hover:text-[color:var(--color-text-main)]" href="#approach">
+          <Link className="rounded-full border border-[color:var(--color-border)] px-30 py-13 text-base font-medium text-[color:var(--color-text-sub)] transition-all duration-200 hover:border-[color:var(--color-accent)]/30 hover:bg-[color:var(--color-surface-card)] hover:text-[color:var(--color-text-main)]" href="/about">
             {t('ctaSecondary')}
           </Link>
         </div>
