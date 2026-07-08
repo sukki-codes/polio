@@ -5,7 +5,7 @@
   width: 100%;
   border-bottom: 1px solid var(--color-border);
   background: color-mix(in srgb, var(--color-surface-elevated) 80%, transparent);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(0.4rem);
 }
 
 .inner {

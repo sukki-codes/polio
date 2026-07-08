@@ -86,7 +86,7 @@
   background: color-mix(in srgb, var(--color-surface-card) 80%, transparent);
   padding: 0.7rem 1.6rem;
   box-shadow: var(--shadow-badge);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(0.8rem);
 }
 
 .badgeDot {
