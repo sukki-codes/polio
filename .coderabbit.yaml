@@ -23,7 +23,7 @@ reviews:
     - path: "src/components/common/**"
       instructions: |
         - 단일 책임 원칙(SRP) 준수 여부를 반드시 검토하라.
-        - Tailwind v4 @theme 변수 사용 여부를 확인하라.
+        - 색상/타이포그래피 등은 하드코딩 대신 src/styles/globals.css의 CSS 커스텀 프로퍼티(--color-*, --text-* 등)를 사용했는지 확인하라.
         - 'use client' 지시어가 불필요하게 사용되진 않았는지 검토하라.
         - Props 타입은 interface가 아닌 type alias를 사용했는지 확인하라.
 
@@ -52,7 +52,8 @@ reviews:
     - path: "**/*.css"
       instructions: |
         - 이 프로젝트는 1rem = 10px 전략을 사용한다(:root { font-size: 62.5% }). px 단위 하드코딩이 있다면 rem 변환을 제안하라.
-        - Tailwind v4 @theme 지시어 내에 커스텀 디자인 토큰이 정의되어 있는지 확인하라.
+        - 이 프로젝트는 CSS Modules를 사용한다(Tailwind 미사용). 디자인 토큰은 src/styles/globals.css의 :root/:root.light CSS 커스텀 프로퍼티로 정의되어 있는지 확인하라.
+        - 컴포넌트 스타일(*.module.css)의 클래스 선택자는 camelCase를 사용하는지 확인하라.
 
     - path: "docs/**"
       instructions: |

@@ -1,14 +1,17 @@
 {
   "extends": "stylelint-config-standard",
   "rules": {
-    "at-rule-no-unknown": [
-      true,
-      {
-        "ignoreAtRules": ["theme", "utility", "custom-variant", "apply", "layer", "config", "plugin", "variant", "reference", "source"]
-      }
-    ],
     "import-notation": "string",
     "property-no-vendor-prefix": null,
-    "custom-property-pattern": null
-  }
+    "media-feature-range-notation": "prefix",
+    "property-no-unknown": [true, { "ignoreProperties": ["composes"] }]
+  },
+  "overrides": [
+    {
+      "files": ["**/*.module.css"],
+      "rules": {
+        "selector-class-pattern": "^[a-z][a-zA-Z0-9]*$"
+      }
+    }
+  ]
 }

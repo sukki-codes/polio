@@ -1,0 +1,27 @@
+.box {
+  display: flex;
+  height: 3.6rem;
+  width: 3.6rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-card);
+}
+
+.button {
+  composes: box;
+  color: var(--color-text-sub);
+  box-shadow: var(--shadow-control);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.button:hover {
+  transform: translateY(-0.05rem);
+  color: var(--color-text-main);
+}
+
+.icon {
+  height: 1.8rem;
+  width: 1.8rem;
+}

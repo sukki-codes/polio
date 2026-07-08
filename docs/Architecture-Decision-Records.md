@@ -251,3 +251,30 @@
 - 이후 페이지(`/about`, `/projects` 등)를 추가할 때도 `src/app/[locale]/` 하위에 만들면 자동으로 i18n이 적용됨
 - 새 텍스트를 추가할 때는 `src/messages/ko.json`과 `en.json`에 동일한 키를 반드시 함께 추가해야 함 — 누락 시 `next-intl`이 빌드/런타임에 에러를 발생시켜 조기에 발견 가능
 - Hero 카피가 PORTFOLIO-SPEC과 다시 일치하게 되어 문서와 실제 구현 간의 드리프트가 해소됨
+
+## 🎯 2026-07-08: Tailwind CSS 제거 → CSS Modules 전환
+
+### Context
+
+- Tailwind 유틸리티 클래스 기반 스타일링에 대한 불만(#60) — 성능 문제가 아니라 `className="flex items-center gap-4 ..."` 식 작성 방식 자체의 가독성/유지보수성 문제. 컴포넌트가 5~6개뿐인 지금이 전환 비용이 가장 낮은 시점이라 판단
+- 1차로 vanilla-extract(제로 런타임 CSS-in-TS)를 채택해 전체 마이그레이션을 완료했으나, `next build`에서 "Styles were unable to be assigned to a file" 에러로 프로덕션 빌드가 깨짐
+- 원인: `@vanilla-extract/next-plugin`은 Webpack 전용 플러그인인데, 이 프로젝트는 `npm run dev`가 `--webpack`을 강제하는 반면 `npm run build`(`next build`)는 Next 16 기본값인 Turbopack을 사용함(2026-07-02 SVG Sprite ADR에서 이미 "dev/build 번들러가 다르다"는 제약을 명시한 바 있음). vanilla-extract는 dev에서는 동작하지만 build에서는 전혀 동작하지 않음
+- 이는 SVG Sprite ADR에서 SVGR 대신 정적 스프라이트를 택했던 것과 동일한 종류의 문제(번들러 로더 의존 방식은 dev/build 두 번들러 설정을 각각 만들고 동기화해야 함) — vanilla-extract도 같은 이유로 기각
+
+### Decision
+
+- **CSS Modules**로 전환 — Next.js가 Webpack/Turbopack 양쪽에 기본 내장 지원하므로 번들러 종속성 문제 자체가 발생하지 않음
+- `src/styles/globals.css`: Tailwind `@theme{}` 블록의 색상/폰트/섀도우/z-index 토큰을 `:root{}`의 일반 CSS 커스텀 프로퍼티로, `@utility dot-grid/gradient-text`를 일반 `.dot-grid`/`.gradient-text` 클래스로 전환. `@layer base{}`는 Tailwind 전용 문법이 아니라 CSS Cascade Layers 표준 문법이라 그대로 유지 가능했음. `:root`/`:root.light`의 다크/라이트 토큰 오버라이드 구조는 변경 없음
+- 컴포넌트별 스타일은 `Component.module.css`로 분리(`Header`, `LocaleSwitcher`, `ThemeToggle`, `layout`, `page`, `about/page`), `import styles from './X.module.css'` 후 `styles.className`으로 사용. 클래스명은 JS 프로퍼티 접근을 위해 camelCase 사용
+- 공유 베이스 스타일 확장은 CSS Modules의 `composes` 문법 사용(`ThemeToggle`의 placeholder/button)
+- 반응형 분기(`sm:`, `md:` 등 Tailwind 프리픽스)는 `@media screen and (min-width: 640px|768px) { ... }`로 직접 작성
+- stylelint: `.stylelintrc.json`에 `*.module.css` 파일만 camelCase 클래스 선택자를 허용하는 `overrides` 추가, `composes`를 `property-no-unknown`의 예외로 등록, `media-feature-range-notation`을 `prefix`(`min-width:` 표기)로 고정
+- `tailwindcss`, `@tailwindcss/postcss`, `postcss.config.mjs`, `@vanilla-extract/*` 전부 제거
+- `.coderabbit.yaml`의 Tailwind `@theme` 관련 path instructions를 CSS Modules/커스텀 프로퍼티 기준으로 갱신
+
+### Consequences
+
+- Webpack/Turbopack 번들러 차이가 이제 스타일링 레이어에서도 전혀 문제가 되지 않음(SVG 스프라이트에 이어 두 번째로 이 원칙을 지킨 사례)
+- 토큰 이름에 대한 컴파일 타임 타입 체크(vanilla-extract가 제공했던 자동완성/오타 검출)는 포기 — 대신 stylelint의 `custom-property-*` 계열 규칙과 코드리뷰로 보완
+- 컴포넌트 스타일이 `.tsx` 옆 `.module.css`로 물리적으로 분리되어, 기존 Tailwind 인라인 className 방식보다 파일 탐색 비용이 늘어남(하지만 이게 애초에 #60이 원했던 방향 — 긴 유틸리티 문자열 대신 이름 붙은 CSS 규칙)
+- vanilla-extract 도입/제거 과정에서 소요된 작업은 되돌렸지만, "이 프로젝트는 번들러에 종속적인 스타일링 도구를 쓰지 않는다"는 원칙이 이번 사례로 재확인되어 향후 스타일링 도구 검토 시 체크리스트로 활용 가능

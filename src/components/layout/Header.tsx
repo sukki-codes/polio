@@ -4,6 +4,8 @@ import { Link } from "@/i18n/navigation";
 import LocaleSwitcher from "@components/layout/LocaleSwitcher";
 import ThemeToggle from "@components/layout/ThemeToggle";
 
+import styles from "./Header.module.css";
+
 export default async function Header() {
   const t = await getTranslations("Header");
   const NAV_LINKS = [
@@ -12,20 +14,17 @@ export default async function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-[var(--z-header)] w-full border-b border-[color:var(--color-border)] bg-[color:var(--color-surface-elevated)]/80 backdrop-blur-sm">
-      <div className="mx-auto flex h-40 max-w-800 items-center justify-between px-15">
-        <Link className="text-xl font-semibold tracking-tight text-[color:var(--color-text-main)]" href="/">
+    <header className={styles.header}>
+      <div className={styles.inner}>
+        <Link className={styles.logo} href="/">
           Polio
         </Link>
-        <div className="flex items-center gap-12">
+        <div className={styles.nav}>
           <nav>
-            <ul className="flex items-center gap-15">
+            <ul className={styles.navList}>
               {NAV_LINKS.map(({ label, href }) => (
                 <li key={href}>
-                  <Link
-                    className="text-base text-[color:var(--color-text-sub)] transition-colors hover:text-[color:var(--color-text-main)]"
-                    href={href}
-                  >
+                  <Link className={styles.navLink} href={href}>
                     {label}
                   </Link>
                 </li>

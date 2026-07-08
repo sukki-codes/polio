@@ -6,6 +6,8 @@ import { useTheme } from 'next-themes';
 
 import Icon from '@components/common/Icon';
 
+import styles from './ThemeToggle.module.css';
+
 export default function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
@@ -15,9 +17,7 @@ export default function ThemeToggle() {
   }, []);
 
   if (!mounted) {
-    return (
-      <div className="flex h-36 w-36 items-center justify-center rounded-full border border-[color:var(--color-border)] bg-[color:var(--color-surface-card)]" />
-    );
+    return <div className={styles.box} />;
   }
 
   const isDark = resolvedTheme === 'dark';
@@ -26,11 +26,11 @@ export default function ThemeToggle() {
     <button
       aria-label={isDark ? '라이트 모드로 전환' : '다크 모드로 전환'}
       aria-pressed={isDark}
-      className="group flex h-36 w-36 items-center justify-center rounded-full border border-[color:var(--color-border)] bg-[color:var(--color-surface-card)] text-[color:var(--color-text-sub)] shadow-control transition duration-200 hover:-translate-y-0.5 hover:text-[color:var(--color-text-main)]"
+      className={styles.button}
       type="button"
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
     >
-      <Icon className="h-18 w-18" name={isDark ? 'sun' : 'moon'} />
+      <Icon className={styles.icon} name={isDark ? 'sun' : 'moon'} />
     </button>
   );
 }

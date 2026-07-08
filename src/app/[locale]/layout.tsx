@@ -11,6 +11,8 @@ import { routing } from "@/i18n/routing";
 import Header from "@components/layout/Header";
 import "@styles/globals.css";
 
+import styles from "./layout.module.css";
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -43,8 +45,8 @@ export default async function RootLayout({ children, params }: Props) {
   setRequestLocale(locale);
 
   return (
-    <html suppressHydrationWarning className={`${inter.variable} h-full`} lang={locale}>
-      <body className="min-h-full flex flex-col bg-[color:var(--color-bg-main)] text-[color:var(--color-text-main)] transition-colors duration-300">
+    <html suppressHydrationWarning className={`${inter.variable} ${styles.html}`} lang={locale}>
+      <body className={styles.body}>
         <NextIntlClientProvider>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
             <Header />
