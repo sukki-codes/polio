@@ -3,7 +3,7 @@
   height: 3.6rem;
   align-items: center;
   justify-content: center;
-  border-radius: 9999px;
+  border-radius: var(--radius-full);
   border: 1px solid var(--color-border);
   background: var(--color-surface-card);
   padding-left: 1.4rem;

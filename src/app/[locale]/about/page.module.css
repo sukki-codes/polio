@@ -79,7 +79,7 @@
   height: 1rem;
   width: 1rem;
   flex-shrink: 0;
-  border-radius: 9999px;
+  border-radius: var(--radius-full);
   background: var(--color-accent);
   box-shadow: var(--shadow-glow-accent);
 }
@@ -130,7 +130,7 @@
 }
 
 .highlightCard {
-  border-radius: 0.75rem;
+  border-radius: var(--radius-sm);
   border: 1px solid var(--color-border);
   background: var(--color-surface-card);
   padding: 2rem;
