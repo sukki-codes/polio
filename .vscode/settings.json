@@ -13,16 +13,13 @@
   "stylelint.configFile": ".stylelintrc.json",
   "stylelint.validate": ["css"],
   "js/ts.format.enable": false,
-  "css.lint.unknownAtRules": "ignore",
-  "tailwindCSS.lint.suggestCanonicalClasses": "ignore",
   "editor.formatOnSave": true,
   "cSpell.words": [
     "cx-suite",
     "renderable"
   ],
   "i18n-ally.localesPaths": [
-    "src/locales",
-    "src/locales/langs"
+    "src/messages"
   ],
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "stylelint.packageManager": "npm",

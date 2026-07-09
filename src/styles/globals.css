@@ -1,41 +1,4 @@
 @import "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css";
-@import "tailwindcss";
-
-@theme {
-  --spacing: 0.1rem;
-  --font-sans: var(--font-inter), "Pretendard Variable", "Noto Sans KR", sans-serif;
-
-  /* Font size scale — paired --text-*--line-height applies automatically with each text-* utility */
-  --text-xs: 1.1rem;
-  --text-xs--line-height: 1.4;
-  --text-sm: 1.3rem;
-  --text-sm--line-height: 1.4;
-  --text-base: 1.4rem;
-  --text-base--line-height: 1.6;
-  --text-lg: 1.6rem;
-  --text-lg--line-height: 1.8;
-  --text-xl: 1.8rem;
-  --text-xl--line-height: 1.3;
-  --text-2xl: 2.2rem;
-  --text-2xl--line-height: 1.3;
-  --text-3xl: 2.8rem;
-  --text-3xl--line-height: 1.25;
-  --text-4xl: 4rem;
-  --text-4xl--line-height: 1.12;
-  --text-5xl: 5.2rem;
-  --text-5xl--line-height: 1.12;
-  --text-6xl: 6.4rem;
-  --text-6xl--line-height: 1.12;
-
-  /* font-weight/tracking/leading use Tailwind's built-in scale except this project-specific label style */
-  --tracking-label: 0.14em;
-
-  /* radius/breakpoint: Tailwind 기본 스케일 그대로 사용, 별도 커스텀 불필요 (필요 시 추가) */
-
-  --shadow-control: 0 1rem 3rem rgb(2 6 23 / 8%);
-  --shadow-badge: 0 1.6rem 5rem rgb(2 6 23 / 8%);
-  --shadow-glow-accent: 0 1.8rem 4.5rem rgb(6 182 212 / 25%);
-}
 
 :root {
   font-size: 62.5%;
@@ -43,6 +6,41 @@
   text-size-adjust: none;
   color-scheme: dark;
 
+  --font-sans: var(--font-inter), "Pretendard Variable", "Noto Sans KR", sans-serif;
+
+  /* Font size scale — pair with the matching --line-height-* below */
+  --text-xs: 1.1rem;
+  --line-height-xs: 1.4;
+  --text-sm: 1.3rem;
+  --line-height-sm: 1.4;
+  --text-base: 1.4rem;
+  --line-height-base: 1.6;
+  --text-lg: 1.6rem;
+  --line-height-lg: 1.8;
+  --text-xl: 1.8rem;
+  --line-height-xl: 1.3;
+  --text-2xl: 2.2rem;
+  --line-height-2xl: 1.3;
+  --text-3xl: 2.8rem;
+  --line-height-3xl: 1.25;
+  --text-4xl: 4rem;
+  --line-height-4xl: 1.12;
+  --text-5xl: 5.2rem;
+  --line-height-5xl: 1.12;
+  --text-6xl: 6.4rem;
+  --line-height-6xl: 1.12;
+  --tracking-label: 0.14em;
+  --radius-sm: 0.75rem;
+  --radius-md: 1rem;
+  --radius-full: 9999px;
+  --shadow-control: 0 1rem 3rem rgb(2 6 23 / 8%);
+  --shadow-badge: 0 1.6rem 5rem rgb(2 6 23 / 8%);
+  --shadow-glow-accent: 0 1.8rem 4.5rem rgb(6 182 212 / 25%);
+  --z-content: 10;
+  --z-header: 50;
+  --z-dropdown: 60;
+  --z-modal: 70;
+  --z-toast: 80;
   --color-primary: #0f172a;
   --color-secondary: #1d4ed8;
   --color-accent: #22d3ee;
@@ -53,13 +51,6 @@
   --color-text-main: #f8fafc;
   --color-text-sub: #9aa8c3;
   --color-border: rgb(148 163 184 / 18%);
-
-  /* z-index: Tailwind에 스케일 네임스페이스가 없어 커스텀 프로퍼티 + 임의값(z-[var(--z-*)])으로 사용 */
-  --z-content: 10;
-  --z-header: 50;
-  --z-dropdown: 60;
-  --z-modal: 70;
-  --z-toast: 80;
 }
 
 :root.light {
@@ -104,6 +95,12 @@
     color: inherit;
   }
 
+  ol, ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
   a {
     text-decoration: none;
     color: inherit;
@@ -126,12 +123,12 @@
   }
 }
 
-@utility dot-grid {
+.dot-grid {
   background-image: radial-gradient(circle, rgb(148 163 184 / 14%) 0.1rem, transparent 0.1rem);
   background-size: 2.8rem 2.8rem;
 }
 
-@utility gradient-text {
+.gradient-text {
   background: linear-gradient(135deg, var(--color-text-main) 10%, var(--color-accent) 85%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -148,7 +145,7 @@
 
 ::-webkit-scrollbar-thumb {
   background: var(--color-primary);
-  border-radius: 1rem;
+  border-radius: var(--radius-md);
 }
 
 ::-webkit-scrollbar-thumb:hover {
