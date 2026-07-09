@@ -1,0 +1,76 @@
+.main {
+  margin: 0 auto;
+  display: flex;
+  width: 100%;
+  max-width: 80rem;
+  flex-direction: column;
+  gap: 4rem;
+  padding: 8rem 1.5rem;
+}
+
+.backLink {
+  font-size: var(--text-sm);
+  line-height: var(--line-height-sm);
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.title {
+  font-size: var(--text-3xl);
+  line-height: var(--line-height-3xl);
+  font-weight: 700;
+  color: var(--color-text-main);
+}
+
+@media screen and (min-width: 640px) {
+  .title {
+    font-size: var(--text-4xl);
+    line-height: var(--line-height-4xl);
+  }
+}
+
+.tagline {
+  max-width: 64rem;
+  font-size: var(--text-lg);
+  line-height: var(--line-height-lg);
+  color: var(--color-text-sub);
+}
+
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.sectionLabel {
+  font-size: var(--text-xs);
+  line-height: var(--line-height-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.sectionList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.sectionItem {
+  font-size: var(--text-base);
+  line-height: var(--line-height-base);
+  color: var(--color-text-sub);
+}
