@@ -5,7 +5,8 @@
   },
   "Header": {
     "home": "Home",
-    "about": "About"
+    "about": "About",
+    "projects": "Projects"
   },
   "Hero": {
     "badge": "Frontend Architect",
@@ -121,5 +122,17 @@
         }
       ]
     }
+  },
+  "Projects": {
+    "metaTitle": "Projects",
+    "metaDescription": "Case studies showing what problems Sukhyeon actually solved, and how.",
+    "eyebrow": "Projects",
+    "heading": "What problems, solved how",
+    "intro": "Not just what was built, but what problem it solved and why — organized as Challenge / Action / Result.",
+    "viewCaseStudy": "View case study",
+    "backToProjects": "Back to projects",
+    "challenge": "Challenge",
+    "action": "Action",
+    "result": "Result"
   }
 }

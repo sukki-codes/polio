@@ -11,6 +11,7 @@ export default async function Header() {
   const NAV_LINKS = [
     { label: t("home"), href: "/" },
     { label: t("about"), href: "/about" },
+    { label: t("projects"), href: "/projects" },
   ];
 
   return (

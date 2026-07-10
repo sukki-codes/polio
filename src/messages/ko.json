@@ -5,7 +5,8 @@
   },
   "Header": {
     "home": "홈",
-    "about": "소개"
+    "about": "소개",
+    "projects": "프로젝트"
   },
   "Hero": {
     "badge": "Frontend Architect",
@@ -121,5 +122,17 @@
         }
       ]
     }
+  },
+  "Projects": {
+    "metaTitle": "프로젝트",
+    "metaDescription": "숙현이 실제로 어떤 문제를 어떻게 풀었는지 보여주는 케이스 스터디.",
+    "eyebrow": "Projects",
+    "heading": "어떤 문제를, 어떻게 풀었는가",
+    "intro": "단순히 무엇을 만들었는지가 아니라, 어떤 문제를 어떤 근거로 풀었는지를 Challenge / Action / Result 구조로 정리했습니다.",
+    "viewCaseStudy": "자세히 보기",
+    "backToProjects": "프로젝트 목록으로",
+    "challenge": "Challenge",
+    "action": "Action",
+    "result": "Result"
   }
 }

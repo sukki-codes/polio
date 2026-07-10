@@ -278,3 +278,28 @@
 - 토큰 이름에 대한 컴파일 타임 타입 체크(vanilla-extract가 제공했던 자동완성/오타 검출)는 포기 — 대신 stylelint의 `custom-property-*` 계열 규칙과 코드리뷰로 보완
 - 컴포넌트 스타일이 `.tsx` 옆 `.module.css`로 물리적으로 분리되어, 기존 Tailwind 인라인 className 방식보다 파일 탐색 비용이 늘어남(하지만 이게 애초에 #60이 원했던 방향 — 긴 유틸리티 문자열 대신 이름 붙은 CSS 규칙)
 - vanilla-extract 도입/제거 과정에서 소요된 작업은 되돌렸지만, "이 프로젝트는 번들러에 종속적인 스타일링 도구를 쓰지 않는다"는 원칙이 이번 사례로 재확인되어 향후 스타일링 도구 검토 시 체크리스트로 활용 가능
+
+## 🎯 2026-07-10: Projects 페이지 — 콘텐츠 구조 및 라우팅 방식 결정
+
+### Context
+
+- PORTFOLIO-SPEC의 "미결정 사항"에 `/projects/[slug]` 상세 페이지를 별도 라우트로 만들지, 카드에서 모달로 처리할지가 남아있었음
+- 핵심 프로젝트 3개(AuraVue/Checkpoint/Cloud)의 Challenge/Action/Result 콘텐츠는 문단 단위의 긴 텍스트라, 기존 `src/messages/{ko,en}.json`(짧은 UI 문자열 카탈로그)에 그대로 넣기엔 관심사가 섞이고 파일이 비대해짐
+- 이 케이스 스터디 콘텐츠는 앞으로도 계속 늘어날 예정(사용자 확인)이라, 처음부터 구조를 잘못 잡으면 나중에 되돌리는 비용이 커짐
+
+### Decision
+
+- **라우팅**: 모달 대신 독립 라우트(`/projects`, `/projects/[slug]`) 채택 — URL 공유/북마크 가능성과 SEO 인덱싱을 위해, 그리고 이 프로젝트가 지금까지 모든 콘텐츠를 실제 라우트로 만들어온 것과의 일관성 때문
+- **콘텐츠 위치**: 케이스 스터디 본문을 `src/messages/*.json`이 아니라 별도 `src/content/projects/`에 분리
+  - `src/content/projects/types.ts`: 공유 타입(`Project`, `ProjectContent`)
+  - `src/content/projects/{slug}.ts`: 프로젝트 1개당 파일 1개, `ko`/`en` 콘텐츠를 함께 보유
+  - `src/content/projects/index.ts`: 개별 파일을 모아 `PROJECTS` 배열과 `getProject(slug)` export
+  - JSON이 아니라 TypeScript로 작성 — `ko`/`en` 중 하나를 빼먹으면 `tsc`가 즉시 잡아줌(JSON은 이 보호가 없음)
+  - 프로젝트 개수가 적을 때(3개) 미리 파일을 쪼개는 선택 — 늘어난 뒤 쪼개는 것보다 지금 비용이 훨씬 낮다고 판단(Tailwind 제거·SVG 스프라이트 ADR과 같은 "숫자 적을 때가 전환 비용 최저" 원칙의 반복 적용)
+- **UI 문자열 vs 콘텐츠 분리 원칙 확정**: `src/messages/*.json`은 헤딩/버튼 등 짧은 재사용 UI 문자열 전용, 긴 본문형 콘텐츠는 `src/content/`로 — 추후 Blog 페이지(#34, MDX 예정)도 이 원칙을 따르게 됨
+
+### Consequences
+
+- 프로젝트가 늘어나도 `src/content/projects/`에 파일만 추가하면 되고, `PROJECTS` 소비 쪽(`getStaticParams`, 목록/상세 페이지) 코드는 변경 불필요
+- 언어별 URL이 별도로 없는 기존 `localePrefix: 'never'` 정책과 동일하게, `/projects/[slug]`도 로케일 프리픽스 없이 동작
+- "기타 프로젝트"(핵심 3개 외)를 상세 페이지 없이 카드만 보여줄지 등 세부 정책은 아직 미정 — 실제로 그런 콘텐츠가 생기기 전까지는 추측성 설계를 피하고 이슈로 남겨둠

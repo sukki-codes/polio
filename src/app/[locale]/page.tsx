@@ -37,7 +37,7 @@ export default async function Home({ params }: Props) {
           {t('subtitle')}
         </p>
         <div className={styles.ctaGroup}>
-          <Link className={styles.ctaPrimary} href="#projects">
+          <Link className={styles.ctaPrimary} href="/projects">
             {t('ctaPrimary')}
           </Link>
           <Link className={styles.ctaSecondary} href="/about">
