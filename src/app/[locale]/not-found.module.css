@@ -1,0 +1,44 @@
+.main {
+  margin: 0 auto;
+  display: flex;
+  min-height: 60vh;
+  width: 100%;
+  max-width: 80rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  padding: 8rem 1.5rem;
+  text-align: center;
+}
+
+.title {
+  font-size: var(--text-3xl);
+  line-height: var(--line-height-3xl);
+  font-weight: 700;
+  color: var(--color-text-main);
+}
+
+.description {
+  max-width: 48rem;
+  font-size: var(--text-lg);
+  line-height: var(--line-height-lg);
+  color: var(--color-text-sub);
+}
+
+.backLink {
+  margin-top: 1.2rem;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  padding: 1.3rem 3rem;
+  font-size: var(--text-base);
+  line-height: var(--line-height-base);
+  font-weight: 600;
+  color: #fff;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.backLink:hover {
+  transform: translateY(-0.05rem);
+  background-color: var(--color-accent-hover);
+}
