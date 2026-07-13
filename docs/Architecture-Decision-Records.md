@@ -303,3 +303,25 @@
 - 프로젝트가 늘어나도 `src/content/projects/`에 파일만 추가하면 되고, `PROJECTS` 소비 쪽(`getStaticParams`, 목록/상세 페이지) 코드는 변경 불필요
 - 언어별 URL이 별도로 없는 기존 `localePrefix: 'never'` 정책과 동일하게, `/projects/[slug]`도 로케일 프리픽스 없이 동작
 - "기타 프로젝트"(핵심 3개 외)를 상세 페이지 없이 카드만 보여줄지 등 세부 정책은 아직 미정 — 실제로 그런 콘텐츠가 생기기 전까지는 추측성 설계를 피하고 이슈로 남겨둠
+
+## 🎯 2026-07-10: 라우트 loading/error/not-found 바운더리 추가
+
+### Context
+
+- 페이지가 3개(`/`, `/about`, `/projects`, `/projects/[slug]`까지 포함하면 4종)로 늘었는데 `loading.tsx`/`error.tsx`/`not-found.tsx`가 하나도 없어서, 잘못된 URL이나 런타임 에러 시 Next.js 기본(스타일 없는) 화면이 그대로 노출되는 상태였음(#27)
+- 이 프로젝트의 루트 레이아웃은 `src/app/[locale]/layout.tsx`(최상위에 별도 `src/app/layout.tsx` 없음) — Next.js 문서(`node_modules/next/dist/docs`)에 따르면 "루트 레이아웃이 최상위 동적 세그먼트(`[locale]` 등)로 정의된 경우, 전역 404 페이지를 layout+not-found 조합만으로 구성하기 어려운 두 케이스 중 하나"로 명시된 상황과 정확히 일치함(→ `global-not-found.js`가 이런 경우를 위해 존재, 단 아직 experimental)
+- `error.js`가 `v16.2.0`부터 새로 `unstable_retry` prop을 받는 것을 문서에서 확인 — 기존에 알려진 `reset()` 대신 이걸 우선 사용하도록 문서가 권장함(AGENTS.md가 경고하는, 훈련 데이터와 다른 breaking change 중 하나)
+
+### Decision
+
+- `src/app/[locale]/not-found.tsx`: `notFound()` 호출(잘못된 `slug`, 잘못된 `locale`)과 `[locale]` 세그먼트 내 미매칭 경로를 처리. 사이트 톤에 맞는 스타일 + 홈으로 돌아가기 링크
+- `src/app/[locale]/error.tsx`: Client Component 에러 바운더리. `reset()` 대신 `unstable_retry()` 사용(v16.2.0 신규 API, 문서가 우선 권장)
+- `src/app/[locale]/loading.tsx`: 번역 없이 순수 시각 요소(펄스 도트 3개)만 사용 — 로딩 상태는 언어 무관하게 통하는 UI라 굳이 `messages/*.json`에 키 추가 안 함
+- **루트(`src/app/not-found.tsx`, `global-not-found.js`)는 이번엔 추가하지 않음**: 이 프로젝트는 next-intl 미들웨어가 모든 경로를 내부적으로 `[locale]`이 붙은 경로로 rewrite하므로, "`[locale]` 세그먼트에 전혀 도달하지 못하는" 진짜 최상위 404는 사실상 발생하지 않음. `global-not-found`는 아직 experimental이라 지금 도입은 과함 — 실제로 이 경로가 문제되는 사례가 생기면 그때 재검토
+
+### Consequences
+
+- 잘못된 프로젝트 slug나 존재하지 않는 경로 접근 시 사이트 톤에 맞는 404 화면이 뜸 (`getProject(slug)`가 `undefined`를 반환하면 `notFound()` 호출 → 이 파일로 연결)
+- 런타임 에러 발생 시에도 빈 화면이나 Next 기본 에러 페이지 대신 재시도 가능한 UI 제공
+- `error.tsx`가 Client Component라 `generateMetadata`를 못 쓰는 제약은 그대로 — 문서에서도 이 경우 React `<title>`을 직접 쓰라고 안내하지만, 지금은 에러 페이지에 별도 메타데이터가 굳이 필요하지 않아 보류
+- 향후 최상위 404 케이스가 실제로 문제된다면 `experimental.globalNotFound` 활성화 여부를 다시 검토

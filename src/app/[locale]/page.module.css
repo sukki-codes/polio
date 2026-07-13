@@ -159,7 +159,7 @@
   font-size: var(--text-base);
   line-height: var(--line-height-base);
   font-weight: 600;
-  color: #fff;
+  color: var(--color-text-on-accent);
   box-shadow: var(--shadow-glow-accent);
   transition: transform 0.2s ease, background-color 0.2s ease;
 }
