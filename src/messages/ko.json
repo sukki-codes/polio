@@ -6,7 +6,8 @@
   "Header": {
     "home": "홈",
     "about": "소개",
-    "projects": "프로젝트"
+    "projects": "프로젝트",
+    "lab": "Lab"
   },
   "Hero": {
     "badge": "Frontend Architect",
@@ -134,6 +135,28 @@
     "challenge": "Challenge",
     "action": "Action",
     "result": "Result"
+  },
+  "Lab": {
+    "metaTitle": "Lab",
+    "metaDescription": "기술 실험과 라이브 데모 — 3D Playground, PDF Generator.",
+    "eyebrow": "Lab",
+    "heading": "직접 만들 줄 안다는 증거",
+    "intro": "완성된 결과물이 아니라, 실제로 동작하는 실험을 통해 기술을 증명하는 공간입니다.",
+    "comingSoon": "준비 중",
+    "demos": {
+      "items": [
+        {
+          "title": "3D Playground",
+          "description": "마우스로 3D 오브젝트를 조작하면서 좌표·회전·바운딩 박스가 실시간으로 어떻게 계산되는지 보여주는 인터랙티브 데모.",
+          "tags": ["Three.js", "React Three Fiber", "@sukki/lab-3d-kit"]
+        },
+        {
+          "title": "PDF Generator",
+          "description": "브라우저에서 직접 PDF를 생성하면서 폰트 로딩 과정과 다국어 렌더링을 시각화하는 데모.",
+          "tags": ["react-pdf/renderer"]
+        }
+      ]
+    }
   },
   "NotFound": {
     "title": "페이지를 찾을 수 없어요",
