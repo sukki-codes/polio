@@ -149,11 +149,12 @@ Result     → 결과 및 임팩트
 - 바운딩 박스 시각화
 - → 별도 npm 패키지로 분리 후 install해서 사용 (엔지니어링 자산화)
 
-**② PDF Generator**
-- 브라우저에서 직접 PDF 생성
-- 폰트 로딩 과정 시각화
-- 다국어 폰트 렌더링 데모
-- → react-pdf/renderer 활용
+**② HTML Report Viewer**
+- 실제 HTML/React 블록(헤딩/문단/이미지 placeholder)으로 렌더링되는 문서
+- dnd-kit 기반 블록 드래그 재배열, contentEditable 기반 인라인 텍스트 편집
+- window.print() + Print CSS로 편집 UI를 숨기고 인쇄/PDF 출력
+- ko/en/ja/ar 샘플 언어 전환 — 폰트 임베딩 없이 즉시 렌더링되는 웹폰트 다국어 데모
+- → Checkpoint 프로젝트에서 실제로 채택한 HTML Report Viewer 접근을 재현 (react-pdf/renderer 대신)
 
 ---
 

@@ -325,3 +325,26 @@
 - 런타임 에러 발생 시에도 빈 화면이나 Next 기본 에러 페이지 대신 재시도 가능한 UI 제공
 - `error.tsx`가 Client Component라 `generateMetadata`를 못 쓰는 제약은 그대로 — 문서에서도 이 경우 React `<title>`을 직접 쓰라고 안내하지만, 지금은 에러 페이지에 별도 메타데이터가 굳이 필요하지 않아 보류
 - 향후 최상위 404 케이스가 실제로 문제된다면 `experimental.globalNotFound` 활성화 여부를 다시 검토
+
+## 🎯 2026-07-23: Lab 데모 — HTML Report Viewer (PDF Generator 계획 대체)
+
+### Context
+
+- PORTFOLIO-SPEC의 Lab 데모 2번("PDF Generator", `react-pdf/renderer` 활용)은 실제 착수 전 초안이었을 뿐, 이 프로젝트의 실제 근거가 된 Checkpoint 프로젝트(`src/content/projects/checkpoint.ts`)에서는 `@react-pdf/renderer`(HTML→이미지 캡처 방식)를 오히려 폐기하고 **HTML Report Viewer**(실제 HTML/React 렌더링 + `window.print()`/Print CSS)로 전환한 이력이 있었음
+- Lab 페이지는 "이 사람 직접 만들 줄 안다"를 증명하는 라이브 데모 공간이고, 트러블슈팅 서사 자체는 이미 Projects 케이스 스터디에 Challenge/Action/Result로 충분히 문서화돼 있어 Lab에서 다시 글로 풀어낼 필요는 없다고 판단 — 대신 실제로 채택했던 접근을 그대로 라이브 데모로 재현하는 방향으로 스펙을 변경
+
+### Decision
+
+- **데모 내용**: 실제 HTML 블록(heading/paragraph/image-placeholder)으로 렌더링된 문서를 `@dnd-kit/core` + `@dnd-kit/sortable`로 드래그 재배열, `contentEditable` 기반으로 인라인 텍스트 편집(리치 텍스트 에디터 라이브러리는 도입하지 않음 — "진짜 DOM 텍스트"라는 메시지에 필요한 범위를 넘어선다고 판단), `window.print()` + `@media print` CSS로 편집 UI를 숨기고 인쇄/PDF 출력. ko/en/ja/ar 샘플 언어 전환으로 다국어 렌더링(웹폰트라 폰트 임베딩 과정 자체가 필요 없다는 점이 react-pdf 대비 차별점) 시연
+- **라우팅**: `/lab` 그리드 카드에 인라인으로 넣기엔 인터랙션 표면이 커서, `projects/[slug]`와 동일한 "카드 → 전용 라우트" 패턴을 따라 `/lab/report-viewer` 신설. `DemoItem` 타입에 optional `href` 추가, `href`가 있는 카드만 `@/i18n/navigation`의 `Link`로 렌더링(3D Playground는 아직 `href` 없이 "준비 중" 상태 유지)
+- **`next/dynamic({ ssr: false })` 최초 도입**: Next.js 문서상 `ssr: false`는 Server Component에서 직접 호출 불가(`page.tsx`는 `getTranslations`/`setRequestLocale`을 쓰는 async Server Component). `dynamic()` 호출만 소유하는 얇은 `'use client'` 로더(`ReportViewerLoader.tsx`)를 두고 `page.tsx`는 이 로더를 평범하게 import하는 방식으로 우회 — 서브트리가 서버에서 전혀 렌더링되지 않아 dnd-kit의 `useId` 기반 aria 값이 hydration 시 서버/클라이언트로 불일치할 걱정도 함께 사라짐
+- **`src/components/features/` 디렉토리 최초 사용**: `.coderabbit.yaml`이 이미 이 경로에 대한 path instruction("비즈니스 로직은 hooks/로 분리, Server Component 우선 설계 검토")을 예고해뒀던 걸 선반영 — 상태/mutation은 컴포넌트가 아니라 `src/hooks/useReportViewerDemo.ts`에 위치
+- **순수 클라이언트 인터랙션 목적의 첫 런타임 의존성**: `@dnd-kit/core` / `@dnd-kit/sortable` / `@dnd-kit/utilities`. `KeyboardSensor`로 키보드 재배열(접근성)까지 기본 제공되는 점, `react-beautiful-dnd`는 유지보수 종료 상태인 점이 근거
+- **ESLint 설정 버그 발견 및 수정**: 구현 중 `onCommitText: (id: string, content: string) => void` 같은 함수 타입 시그니처의 파라미터명이 `no-unused-vars`(base rule)에 의해 "사용 안 함"으로 오탐되는 걸 발견 — `eslint-config-next/typescript`가 이미 TS 인식 버전(`@typescript-eslint/no-unused-vars`)을 등록해뒀는데, 프로젝트 자체 설정이 TS 문법을 모르는 base rule을 별도로 `"error"` 재등록해 충돌하고 있었음. base rule 등록을 제거해 해결
+
+### Consequences
+
+- 트러블슈팅 서사(Projects)와 라이브 데모(Lab)의 역할이 명확히 분리됨 — 앞으로 Lab에 새 데모를 추가할 때도 "글로 설명"이 아니라 "만질 수 있는 것"에 집중하는 기준으로 삼을 수 있음
+- 브라우저 전용 Lab 데모에 대한 "dynamic import + `ssr:false`로 분리" 정책이 실제 코드로 처음 확립됨 — 이후 3D Playground(`@sukki/lab-3d-kit`, #69) 통합 시에도 동일 패턴(로더 컴포넌트 경유) 재사용 가능
+- `src/components/features/` 컨벤션(컴포넌트는 뷰, 상태/로직은 `src/hooks/`)이 처음으로 실제 코드에 반영되어, 향후 CodeRabbit 리뷰가 이 경로에 대해 참조할 실제 사례가 생김
+- ESLint 설정 수정으로 이후 어떤 코드든 함수 타입 시그니처에 이름 있는 파라미터를 자유롭게 쓸 수 있게 됨(이전엔 해당 패턴을 쓰는 순간 무조건 lint 에러였음)
