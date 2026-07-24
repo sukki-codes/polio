@@ -120,9 +120,10 @@ const eslintConfig = defineConfig([
   },
 
   // ─── 코드 품질 규칙 ───────────────────────────────────────────────────────
+  // no-unused-vars는 TS 타입 문법을 이해 못 해서 타입 함수 시그니처의 파라미터명을
+  // 오탐하므로 등록하지 않음 — nextTs가 이미 @typescript-eslint/no-unused-vars를 등록함.
   {
     rules: {
-      "no-unused-vars": "error",
       "no-console": ["warn", { allow: ["warn", "error"] }],
       "no-debugger": "error",
     },

@@ -4,7 +4,8 @@
     "import-notation": "string",
     "property-no-vendor-prefix": null,
     "media-feature-range-notation": "prefix",
-    "property-no-unknown": [true, { "ignoreProperties": ["composes"] }]
+    "property-no-unknown": [true, { "ignoreProperties": ["composes"] }],
+    "value-keyword-case": [ "lower", { "ignoreProperties": ["composes"] } ]
   },
   "overrides": [
     {
