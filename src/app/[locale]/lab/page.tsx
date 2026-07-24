@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
+import { Link } from '@/i18n/navigation';
+
 import styles from './page.module.css';
 
 type Props = {
@@ -11,6 +13,7 @@ type DemoItem = {
   title: string;
   description: string;
   tags: string[];
+  href?: string;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -43,28 +46,40 @@ export default async function LabPage({ params }: Props) {
         </p>
       </header>
       <div className={styles.grid}>
-        {demoItems.map((demo) => (
-          <div key={demo.title} className={styles.card}>
-            <div className={styles.cardHeader}>
-              <h2 className={styles.cardTitle}>
-                {demo.title}
-              </h2>
-              <span className={styles.cardStatus}>
-                {t('comingSoon')}
-              </span>
+        {demoItems.map((demo) => {
+          const cardBody = (
+            <>
+              <div className={styles.cardHeader}>
+                <h2 className={styles.cardTitle}>
+                  {demo.title}
+                </h2>
+                <span className={demo.href ? styles.cardStatusLive : styles.cardStatus}>
+                  {demo.href ? t('tryItNow') : t('comingSoon')}
+                </span>
+              </div>
+              <p className={styles.cardDescription}>
+                {demo.description}
+              </p>
+              <ul className={styles.tagList}>
+                {demo.tags.map((tag) => (
+                  <li key={tag} className={styles.tag}>
+                    {tag}
+                  </li>
+                ))}
+              </ul>
+            </>
+          );
+
+          return demo.href ? (
+            <Link key={demo.title} className={styles.card} href={demo.href}>
+              {cardBody}
+            </Link>
+          ) : (
+            <div key={demo.title} className={styles.card}>
+              {cardBody}
             </div>
-            <p className={styles.cardDescription}>
-              {demo.description}
-            </p>
-            <ul className={styles.tagList}>
-              {demo.tags.map((tag) => (
-                <li key={tag} className={styles.tag}>
-                  {tag}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </main>
   );

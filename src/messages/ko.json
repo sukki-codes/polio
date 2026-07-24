@@ -138,11 +138,12 @@
   },
   "Lab": {
     "metaTitle": "Lab",
-    "metaDescription": "기술 실험과 라이브 데모 — 3D Playground, PDF Generator.",
+    "metaDescription": "기술 실험과 라이브 데모 — 3D Playground, HTML Report Viewer.",
     "eyebrow": "Lab",
     "heading": "직접 만들 줄 안다는 증거",
     "intro": "완성된 결과물이 아니라, 실제로 동작하는 실험을 통해 기술을 증명하는 공간입니다.",
     "comingSoon": "준비 중",
+    "tryItNow": "지금 체험하기",
     "demos": {
       "items": [
         {
@@ -151,12 +152,33 @@
           "tags": ["Three.js", "React Three Fiber", "@sukki/lab-3d-kit"]
         },
         {
-          "title": "PDF Generator",
-          "description": "브라우저에서 직접 PDF를 생성하면서 폰트 로딩 과정과 다국어 렌더링을 시각화하는 데모.",
-          "tags": ["react-pdf/renderer"]
+          "title": "HTML Report Viewer",
+          "description": "실제 HTML 블록으로 렌더링된 리포트를 드래그로 재배열하고 인라인으로 편집한 뒤, Print CSS로 그대로 인쇄/PDF 출력까지 해보는 데모.",
+          "tags": ["dnd-kit", "contentEditable", "window.print()"],
+          "href": "/lab/report-viewer"
         }
       ]
+    },
+    "reportViewer": {
+      "metaTitle": "HTML Report Viewer — Lab",
+      "metaDescription": "블록 드래그 재배열, 인라인 편집, Print CSS 기반 PDF 출력을 직접 체험하는 데모.",
+      "backLink": "← Lab으로 돌아가기",
+      "eyebrow": "Lab / HTML Report Viewer",
+      "heading": "브라우저에서 그대로 동작하는 리포트 뷰어",
+      "intro": "실제 텍스트로 렌더링된 문서를 드래그로 재배열하고 바로 수정한 뒤, 인쇄 미리보기로 확인해보세요."
     }
+  },
+  "ReportViewerDemo": {
+    "language": "샘플 언어",
+    "languageNames": {
+      "ko": "한국어",
+      "en": "English",
+      "ja": "日本語",
+      "ar": "العربية"
+    },
+    "dragHandle": "드래그해서 순서 바꾸기",
+    "print": "인쇄 / PDF로 저장",
+    "reset": "초기 상태로 되돌리기"
   },
   "NotFound": {
     "title": "페이지를 찾을 수 없어요",

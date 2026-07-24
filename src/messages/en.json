@@ -138,11 +138,12 @@
   },
   "Lab": {
     "metaTitle": "Lab",
-    "metaDescription": "Technical experiments and live demos — 3D Playground, PDF Generator.",
+    "metaDescription": "Technical experiments and live demos — 3D Playground, HTML Report Viewer.",
     "eyebrow": "Lab",
     "heading": "Proof that I can actually build it",
     "intro": "Not a finished product, but a space to prove skills through experiments that actually run.",
     "comingSoon": "In progress",
+    "tryItNow": "Try it now",
     "demos": {
       "items": [
         {
@@ -151,12 +152,33 @@
           "tags": ["Three.js", "React Three Fiber", "@sukki/lab-3d-kit"]
         },
         {
-          "title": "PDF Generator",
-          "description": "A demo that generates PDFs directly in the browser while visualizing font loading and multilingual rendering.",
-          "tags": ["react-pdf/renderer"]
+          "title": "HTML Report Viewer",
+          "description": "A demo that renders a report as real HTML blocks — drag to reorder, edit inline, and print/export to PDF straight from the browser with Print CSS.",
+          "tags": ["dnd-kit", "contentEditable", "window.print()"],
+          "href": "/lab/report-viewer"
         }
       ]
+    },
+    "reportViewer": {
+      "metaTitle": "HTML Report Viewer — Lab",
+      "metaDescription": "Try block drag-reordering, inline editing, and Print CSS-based PDF output yourself.",
+      "backLink": "← Back to Lab",
+      "eyebrow": "Lab / HTML Report Viewer",
+      "heading": "A report viewer that runs entirely in the browser",
+      "intro": "Reorder a real, text-rendered document by dragging, edit it inline, then check the print preview."
     }
+  },
+  "ReportViewerDemo": {
+    "language": "Sample language",
+    "languageNames": {
+      "ko": "한국어",
+      "en": "English",
+      "ja": "日本語",
+      "ar": "العربية"
+    },
+    "dragHandle": "Drag to reorder",
+    "print": "Print / Save as PDF",
+    "reset": "Reset to initial state"
   },
   "NotFound": {
     "title": "Page not found",
