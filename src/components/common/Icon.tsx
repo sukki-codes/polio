@@ -1,6 +1,6 @@
 import { SVGAttributes } from 'react';
 
-type IconName = 'moon' | 'sun';
+type IconName = 'grip' | 'moon' | 'print' | 'sun';
 
 type IconProps = {
   name: IconName;

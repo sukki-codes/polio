@@ -1,0 +1,119 @@
+.demo {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.loadingSkeleton {
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-card);
+  height: 40rem;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-elevated);
+  padding: 1.2rem 1.6rem;
+}
+
+.languageGroup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.languageLabel {
+  font-size: var(--text-xs);
+  line-height: var(--line-height-xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-text-sub);
+}
+
+.languageButton {
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: none;
+  padding: 0.4rem 1rem;
+  font-size: var(--text-sm);
+  line-height: var(--line-height-sm);
+  color: var(--color-text-sub);
+  cursor: pointer;
+}
+
+.languageButtonActive {
+  composes: languageButton;
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.actionGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.resetButton {
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: none;
+  padding: 0.6rem 1.2rem;
+  font-size: var(--text-sm);
+  line-height: var(--line-height-sm);
+  color: var(--color-text-sub);
+  cursor: pointer;
+}
+
+.printButton {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: var(--color-accent);
+  padding: 0.6rem 1.2rem;
+  font-size: var(--text-sm);
+  line-height: var(--line-height-sm);
+  font-weight: 500;
+  color: var(--color-text-on-accent);
+  cursor: pointer;
+}
+
+.printButton svg {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.documentSurface {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-card);
+  padding: 2.4rem;
+  box-shadow: var(--shadow-control);
+}
+
+@media print {
+  .toolbar {
+    display: none !important;
+  }
+
+  .documentSurface {
+    border: none;
+    box-shadow: none;
+    background: #fff;
+    color: #000;
+    forced-color-adjust: none;
+  }
+}

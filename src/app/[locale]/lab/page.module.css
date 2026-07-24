@@ -92,6 +92,12 @@
   color: var(--color-text-sub);
 }
 
+.cardStatusLive {
+  composes: cardStatus;
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
 .cardDescription {
   font-size: var(--text-sm);
   line-height: var(--line-height-sm);

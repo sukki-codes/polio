@@ -1,0 +1,77 @@
+.block {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-card);
+  padding: 1.6rem;
+}
+
+.dragging {
+  composes: block;
+  box-shadow: var(--shadow-control);
+  opacity: 0.6;
+}
+
+.dragHandle {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  padding: 0.4rem;
+  color: var(--color-text-sub);
+  cursor: grab;
+  touch-action: none;
+}
+
+.dragHandle svg {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+.blockHeading {
+  flex: 1;
+  font-size: var(--text-xl);
+  line-height: var(--line-height-xl);
+  font-weight: 600;
+  color: var(--color-text-main);
+  outline: none;
+}
+
+.blockParagraph {
+  flex: 1;
+  font-size: var(--text-base);
+  line-height: var(--line-height-base);
+  color: var(--color-text-sub);
+  outline: none;
+}
+
+.imagePlaceholder {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  border: 1px dashed var(--color-border);
+  padding: 2.4rem;
+  font-size: var(--text-sm);
+  line-height: var(--line-height-sm);
+  color: var(--color-text-sub);
+  text-align: center;
+}
+
+@media print {
+  .block,
+  .dragging {
+    border: none;
+    background: none;
+    break-inside: avoid;
+  }
+
+  .dragHandle {
+    display: none !important;
+  }
+}
